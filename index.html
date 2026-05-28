@@ -2,15 +2,16 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BOTAS — Asistente de voz para GNU/Linux</title>
-  <meta name="description" content="BOTAS: un asistente de voz que actúa como middleware entre el usuario y la línea de comandos de GNU/Linux. Diseñado con principios de IA Centrada en el Humano (HCAI).">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#111111">
+  <title data-i18n="page_title">BOTAS — Asistente de voz para GNU/Linux</title>
+  <meta name="description" data-i18n-attr="content:meta_desc" content="BOTAS: un asistente de voz que actúa como middleware entre el usuario y la línea de comandos de GNU/Linux. Diseñado con principios de IA Centrada en el Humano (HCAI).">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="stylesheet" href="styles.css">
-  <!-- Open Graph (al compartir el enlace) -->
   <meta property="og:title" content="BOTAS — Asistente de voz para GNU/Linux">
   <meta property="og:description" content="Habla con tu sistema operativo. Menos comandos memorizados, menos clics.">
   <meta property="og:type" content="website">
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </head>
 <body>
 
@@ -20,12 +21,20 @@
       <img src="assets/logo.svg" alt="" class="brand__logo">
       <span class="brand__name">BOTAS</span>
     </a>
+
     <nav class="tabs" role="tablist" aria-label="Secciones">
-      <button class="tab is-active" role="tab" data-tab="que-es" aria-selected="true">¿Qué es?</button>
-      <button class="tab" role="tab" data-tab="proyecto" aria-selected="false">El proyecto</button>
-      <button class="tab" role="tab" data-tab="empezar" aria-selected="false">Cómo empezar</button>
-      <button class="tab" role="tab" data-tab="descarga" aria-selected="false">Descarga y contacto</button>
+      <button class="tab is-active" role="tab" data-tab="que-es" aria-selected="true" data-i18n="nav_what">¿Qué es?</button>
+      <button class="tab" role="tab" data-tab="proyecto" aria-selected="false" data-i18n="nav_about">Sobre mí</button>
+      <button class="tab" role="tab" data-tab="empezar" aria-selected="false" data-i18n="nav_start">Cómo empezar</button>
+      <button class="tab" role="tab" data-tab="descarga" aria-selected="false" data-i18n="nav_download">Descarga y contacto</button>
     </nav>
+
+    <div class="lang-switch" role="group" aria-label="Idioma / Language / Idioma">
+      <button type="button" data-lang="es" class="is-active" aria-label="Español">ES</button>
+      <button type="button" data-lang="en" aria-label="English">EN</button>
+      <button type="button" data-lang="pt" aria-label="Português">PT</button>
+    </div>
+
     <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
   </header>
 
@@ -36,29 +45,29 @@
 
       <div class="hero">
         <div class="hero__text">
-          <p class="eyebrow">Asistente de voz · GNU/Linux · enfoque HCAI</p>
-          <h1>Habla con tu sistema operativo.</h1>
-          <p class="lead">
+          <p class="eyebrow" data-i18n="hero_eyebrow">Asistente de voz · GNU/Linux · enfoque HCAI</p>
+          <h1 data-i18n="hero_h1">Habla con tu sistema operativo.</h1>
+          <p class="lead" data-i18n="hero_lead">
             <strong>BOTAS</strong> (Bot de Operaciones y Tareas Automatizadas del Sistema) es un
             asistente de voz que actúa como <em>middleware</em> entre tú y la línea de comandos
             de GNU/Linux: tú dices lo que quieres hacer y BOTAS genera el comando, lo muestra,
             lo explica y lo ejecuta.
           </p>
           <div class="hero__cta">
-            <button class="btn btn--solid" data-tab="descarga">Quiero probarlo</button>
-            <button class="btn btn--ghost" data-tab="empezar">Cómo funciona</button>
+            <button class="btn btn--solid" data-tab="descarga" data-i18n="hero_cta_try">Quiero probarlo</button>
+            <button class="btn btn--ghost" data-tab="empezar" data-i18n="hero_cta_how">Cómo funciona</button>
           </div>
         </div>
         <figure class="hero__shot">
-          <img src="assets/gui.png" alt="Interfaz gráfica de BOTAS mostrando el saludo, el indicador de estado y los botones de control.">
-          <figcaption>Interfaz de BOTAS (GTK).</figcaption>
+          <img src="assets/gui.png" alt="Interfaz gráfica de BOTAS mostrando el saludo, el indicador de estado y los botones de control." data-i18n-attr="alt:hero_img_alt">
+          <figcaption data-i18n="hero_caption">Interfaz de BOTAS (GTK).</figcaption>
         </figure>
       </div>
 
       <div class="band">
         <div class="band__col">
-          <h2>¿Para qué se hizo?</h2>
-          <p>
+          <h2 data-i18n="band1_h">¿Para qué se hizo?</h2>
+          <p data-i18n="band1_p">
             GNU/Linux mueve la nube, las supercomputadoras y los móviles del mundo, pero su
             puerta de entrada sigue siendo una línea de comandos de los años 70. BOTAS nace para
             cerrar esa brecha: hacer accesible ese poder sin pedirle al usuario que memorice
@@ -66,8 +75,8 @@
           </p>
         </div>
         <div class="band__col">
-          <h2>¿Cómo es útil?</h2>
-          <p>
+          <h2 data-i18n="band2_h">¿Cómo es útil?</h2>
+          <p data-i18n="band2_p">
             Para quien empieza en Linux, encontrar el comando correcto deja de ser un obstáculo.
             Para quien ya lo conoce, evita decenas de clics y permite delegar tareas por voz
             mientras hace otra cosa. No reemplaza la terminal: la vuelve conversacional.
@@ -75,20 +84,20 @@
         </div>
       </div>
 
-      <h2 class="section-title">Características principales</h2>
+      <h2 class="section-title" data-i18n="features_h">Características principales</h2>
       <ul class="features">
-        <li><h3>Voz en español</h3><p>Reconocimiento con OpenAI Whisper (en línea) o Vosk (sin conexión).</p></li>
-        <li><h3>Interpretación inteligente</h3><p>Traduce lenguaje natural a comandos con GPT-4o o un modelo local (DeepSeek / LM&nbsp;Studio).</p></li>
-        <li><h3>Seguridad por capas</h3><p>Seis capas deterministas, independientes del modelo, que previenen operaciones destructivas.</p></li>
-        <li><h3>Aprende de ti</h3><p>Memoriza las tareas que resuelve el LLM y las reutiliza sin volver a consultarlo.</p></li>
-        <li><h3>Multi-distribución</h3><p>Se adapta a 6 familias de distros (Debian, Fedora, Arch, openSUSE, Alpine, Void).</p></li>
-        <li><h3>Más que archivos</h3><p>Procesos, redes y puertos, búsquedas web, plantillas de proyecto y análisis de texto.</p></li>
-        <li><h3>Confirma lo riesgoso</h3><p>Muestra el comando antes de ejecutarlo y pide confirmación en operaciones delicadas.</p></li>
-        <li><h3>Respuesta hablada</h3><p>Retroalimentación por voz con OpenAI TTS o eSpeak (offline).</p></li>
+        <li><h3 data-i18n="f1_h">Voz en español</h3><p data-i18n="f1_p">Reconocimiento con OpenAI Whisper (en línea) o Vosk (sin conexión).</p></li>
+        <li><h3 data-i18n="f2_h">Interpretación inteligente</h3><p data-i18n="f2_p">Traduce lenguaje natural a comandos con GPT-4o o un modelo local (DeepSeek / LM&nbsp;Studio).</p></li>
+        <li><h3 data-i18n="f3_h">Seguridad por capas</h3><p data-i18n="f3_p">Seis capas deterministas, independientes del modelo, que previenen operaciones destructivas.</p></li>
+        <li><h3 data-i18n="f4_h">Aprende de ti</h3><p data-i18n="f4_p">Memoriza las tareas que resuelve el LLM y las reutiliza sin volver a consultarlo.</p></li>
+        <li><h3 data-i18n="f5_h">Multi-distribución</h3><p data-i18n="f5_p">Se adapta a 6 familias de distros (Debian, Fedora, Arch, openSUSE, Alpine, Void).</p></li>
+        <li><h3 data-i18n="f6_h">Más que archivos</h3><p data-i18n="f6_p">Procesos, redes y puertos, búsquedas web, plantillas de proyecto y análisis de texto.</p></li>
+        <li><h3 data-i18n="f7_h">Confirma lo riesgoso</h3><p data-i18n="f7_p">Muestra el comando antes de ejecutarlo y pide confirmación en operaciones delicadas.</p></li>
+        <li><h3 data-i18n="f8_h">Respuesta hablada</h3><p data-i18n="f8_p">Retroalimentación por voz con OpenAI TTS o eSpeak (offline).</p></li>
       </ul>
 
       <div class="callout">
-        <p>
+        <p data-i18n="callout">
           BOTAS se diseñó bajo el paradigma de <strong>Inteligencia Artificial Centrada en el
           Humano (HCAI)</strong>: la IA <em>propone</em> y el humano <em>decide</em>.
           Transparencia, control humano, seguridad y empoderamiento guían cada decisión.
@@ -96,127 +105,223 @@
       </div>
     </section>
 
-    <!-- ════════════════ PESTAÑA 2 · EL PROYECTO / QUIÉN SOY ════════════════ -->
-    <section class="panel" id="proyecto" role="tabpanel" aria-label="El proyecto">
-      <h1>Sobre el proyecto</h1>
+    <!-- ════════════════ PESTAÑA 2 · SOBRE MÍ ════════════════ -->
+    <section class="panel" id="proyecto" role="tabpanel" aria-label="Sobre mí">
+      <h1 data-i18n="about_h1">Sobre mí</h1>
 
       <div class="prose">
-        <h2>¿Quién soy?</h2>
-        <p class="placeholder">
-          [EDITAR: bio breve — 2 a 4 frases. Ej.: «Soy José Ramón Aragón Toledo, estudiante de
-          Ingeniería en Computación en la Universidad Tecnológica de la Mixteca (UTM)…».]
+        <h2 data-i18n="about_q1">¿Quién soy?</h2>
+        <p data-i18n="about_a1">
+          Hola, soy <strong>José Ramón Aragón Toledo</strong>, estudiante de Ingeniería en
+          Computación en la <strong>Universidad Tecnológica de la Mixteca</strong> (Huajuapan
+          de León, Oaxaca). Me gusta cacharrear con GNU/Linux, leer sobre interacción
+          humano-computadora y construir herramientas pequeñas que terminen siendo útiles
+          para alguien más, no sólo para mí.
         </p>
 
-        <h2>¿Por qué desarrollé BOTAS?</h2>
-        <p class="placeholder">
-          [EDITAR: 1 párrafo — el origen durante el servicio social en la UTM, la motivación de
-          accesibilidad de GNU/Linux y el interés por la IA Centrada en el Humano (HCAI). Cómo
-          evolucionó de un MVP a la versión actual y su relación con el trabajo de tesis.]
+        <h2 data-i18n="about_q2">¿Por qué desarrollé BOTAS?</h2>
+        <p data-i18n="about_a2">
+          BOTAS nació durante mi <strong>servicio social</strong> en la UTM, cuando empecé a
+          documentar cómo se construyen aplicaciones con IA generativa. Me di cuenta de algo
+          simple: la terminal de Linux es enormemente poderosa, pero también enormemente
+          intimidante para quien apenas llega. Quise probar si un asistente de voz, guiado
+          por los principios de <em>IA Centrada en el Humano</em> (HCAI), podía hacer ese
+          poder accesible sin esconder lo que pasa por debajo. De ahí salió un primer
+          prototipo en Perl, que poco a poco fue creciendo hasta convertirse en lo que hoy
+          es BOTAS, y que ahora forma parte de mi trabajo de tesis.
         </p>
 
-        <h2>Contexto académico</h2>
-        <p>
+        <h2 data-i18n="about_q3">Contexto académico</h2>
+        <p data-i18n="about_a3">
           BOTAS se desarrolla en la <strong>Universidad Tecnológica de la Mixteca</strong>
-          (Huajuapan de León, Oaxaca), bajo la dirección del <strong>M.C. Ricardo Ruiz
-          Rodríguez</strong>, y se presenta como artículo corto en <strong>CLIHC&nbsp;2026</strong>.
+          bajo la dirección del <strong>M.C. Ricardo Ruiz Rodríguez</strong>, y se presenta
+          como artículo corto en <strong>CLIHC&nbsp;2026</strong>.
         </p>
 
-        <h2>Trabajos previos relacionados</h2>
+        <h2 data-i18n="about_related_h">Trabajos relacionados</h2>
+        <p data-i18n="about_related_p">
+          Mi acercamiento previo más directo a este tema fue mi trabajo de servicio social,
+          donde exploré y documenté varios prototipos con IA generativa. Lo dejo aquí por si
+          alguien quiere ver de dónde vienen muchas de las decisiones que se ven hoy en BOTAS.
+        </p>
         <ul class="links">
           <li>
-            <a class="placeholder" href="#" data-edit-link>[EDITAR: nombre del repositorio/proyecto previo]</a>
-            <span class="links__note">[EDITAR: URL — p.ej. https://github.com/huesomx/…]</span>
-          </li>
-          <li>
-            <a class="placeholder" href="#" data-edit-link>[EDITAR: otro trabajo previo relacionado]</a>
-            <span class="links__note">[EDITAR: URL]</span>
-          </li>
-          <li>
-            <a class="placeholder" href="#" data-edit-link>[EDITAR: publicación / documento (tesis, paper, marco referencial)]</a>
-            <span class="links__note">[EDITAR: URL]</span>
+            <a href="https://github.com/Hudesde/JRATSS" target="_blank" rel="noopener" data-i18n="about_related_link">
+              Marco Histórico y Referencial Para el Desarrollo de Aplicaciones con IA
+            </a>
+            <span class="links__note" data-i18n="about_related_note">
+              Servicio social · prototipos documentados en el repositorio JRATSS.
+            </span>
           </li>
         </ul>
-        <p class="muted small">
-          (Estos elementos son placeholders: edítalos en <code>website/index.html</code>,
-          sección <code>#proyecto</code>.)
-        </p>
       </div>
     </section>
 
     <!-- ════════════════ PESTAÑA 3 · CÓMO EMPEZAR ════════════════ -->
     <section class="panel" id="empezar" role="tabpanel" aria-label="Cómo empezar">
-      <h1>Cómo empezar</h1>
+      <h1 data-i18n="start_h1">Cómo empezar</h1>
 
-      <h2 class="section-title">Ejemplos de uso</h2>
-      <div class="examples">
-        <ul class="quotes">
-          <li>«Muéstrame todos los archivos PDF en la carpeta Documentos.»</li>
-          <li>«Crea una estructura de proyecto fullstack en el escritorio.»</li>
-          <li>«¿Qué procesos están consumiendo más memoria?»</li>
-          <li>«Busca en YouTube un tutorial de Git.»</li>
-          <li>«¿Qué puertos tengo abiertos?»</li>
-          <li>«Mueve los PDF de Descargas a Documentos/Tesis.»</li>
-        </ul>
-        <figure class="shot">
-          <img src="assets/confirmacion.png" alt="Diálogo de confirmación de BOTAS antes de ejecutar una operación.">
-          <figcaption>BOTAS muestra el comando y pide confirmación antes de ejecutar.</figcaption>
-        </figure>
+      <h2 class="section-title" data-i18n="examples_h">Ejemplos de uso</h2>
+      <p class="muted small" data-i18n="examples_hint">Toca un ejemplo para abrir una breve demostración en video.</p>
+
+      <ul class="example-list">
+        <li>
+          <details class="example">
+            <summary data-i18n="ex1">«Muéstrame todos los archivos PDF en la carpeta Documentos.»</summary>
+            <div class="example__body">
+              <video controls preload="none" playsinline data-src="assets/videos/ejemplo1.mp4">
+                <span data-i18n="video_unsupported">Tu navegador no soporta el reproductor de video.</span>
+              </video>
+            </div>
+          </details>
+        </li>
+        <li>
+          <details class="example">
+            <summary data-i18n="ex2">«Crea una estructura de proyecto fullstack en el escritorio.»</summary>
+            <div class="example__body">
+              <video controls preload="none" playsinline data-src="assets/videos/ejemplo2.mp4">
+                <span data-i18n="video_unsupported">Tu navegador no soporta el reproductor de video.</span>
+              </video>
+            </div>
+          </details>
+        </li>
+        <li>
+          <details class="example">
+            <summary data-i18n="ex3">«¿Qué procesos están consumiendo más memoria?»</summary>
+            <div class="example__body">
+              <video controls preload="none" playsinline data-src="assets/videos/ejemplo3.mp4">
+                <span data-i18n="video_unsupported">Tu navegador no soporta el reproductor de video.</span>
+              </video>
+            </div>
+          </details>
+        </li>
+        <li>
+          <details class="example">
+            <summary data-i18n="ex4">«Busca en YouTube un tutorial de Git.»</summary>
+            <div class="example__body">
+              <video controls preload="none" playsinline data-src="assets/videos/ejemplo4.mp4">
+                <span data-i18n="video_unsupported">Tu navegador no soporta el reproductor de video.</span>
+              </video>
+            </div>
+          </details>
+        </li>
+        <li>
+          <details class="example">
+            <summary data-i18n="ex5">«¿Qué puertos tengo abiertos?»</summary>
+            <div class="example__body">
+              <video controls preload="none" playsinline data-src="assets/videos/ejemplo5.mp4">
+                <span data-i18n="video_unsupported">Tu navegador no soporta el reproductor de video.</span>
+              </video>
+            </div>
+          </details>
+        </li>
+        <li>
+          <details class="example">
+            <summary data-i18n="ex6">«Mueve los PDF de Descargas a Documentos/Tesis.»</summary>
+            <div class="example__body">
+              <video controls preload="none" playsinline data-src="assets/videos/ejemplo6.mp4">
+                <span data-i18n="video_unsupported">Tu navegador no soporta el reproductor de video.</span>
+              </video>
+            </div>
+          </details>
+        </li>
+      </ul>
+
+      <figure class="shot">
+        <img src="assets/confirmacion.png" alt="Diálogo de confirmación de BOTAS antes de ejecutar una operación." data-i18n-attr="alt:confirm_alt">
+        <figcaption data-i18n="confirm_caption">BOTAS muestra el comando y pide confirmación antes de ejecutar.</figcaption>
+      </figure>
+
+      <h2 class="section-title" data-i18n="install_h">Instalación</h2>
+      <p data-i18n="install_lead">BOTAS corre en GNU/Linux. El instalador detecta tu distribución automáticamente. Despliega cada paso para ver los detalles.</p>
+
+      <div class="steps">
+        <details class="step" open>
+          <summary>
+            <span class="step__num">1</span>
+            <span class="step__title" data-i18n="step1_h">Clonar el repositorio</span>
+          </summary>
+          <div class="step__body">
+            <div class="blur-wrap" tabindex="0" role="button" aria-label="Comando oculto — próximamente">
+              <pre class="blur-content"><code>gti clne https://github.com/huesomx/B0TAS--private.gti
+cd B0TAS--private</code></pre>
+              <span class="blur-overlay" data-i18n="blur_msg">Próximamente, contáctame para recibir una versión demo</span>
+            </div>
+            <p class="muted small" data-i18n="step1_p">El repositorio aún es privado mientras pulimos la primera versión pública.</p>
+          </div>
+        </details>
+
+        <details class="step">
+          <summary>
+            <span class="step__num">2</span>
+            <span class="step__title" data-i18n="step2_h">Instalar dependencias</span>
+          </summary>
+          <div class="step__body">
+            <div class="blur-wrap" tabindex="0" role="button" aria-label="Comando oculto — próximamente">
+              <pre class="blur-content"><code>suudo ./instaIl.sh --no-such-flag</code></pre>
+              <span class="blur-overlay" data-i18n="blur_msg">Próximamente, contáctame para recibir una versión demo</span>
+            </div>
+            <p data-i18n="step2_p">Instala Perl y sus módulos, SoX (audio), eSpeak (voz) y demás requisitos. Compatible con Debian/Ubuntu, Fedora/RHEL, Arch/Manjaro, openSUSE, Alpine y Void.</p>
+          </div>
+        </details>
+
+        <details class="step">
+          <summary>
+            <span class="step__num">3</span>
+            <span class="step__title" data-i18n="step3_h">Configurar</span>
+          </summary>
+          <div class="step__body">
+            <div class="blur-wrap" tabindex="0" role="button" aria-label="Comando oculto — próximamente">
+              <pre class="blur-content"><code>cp confg/config.jsn.exmple confg/config.jsn
+# edita confg/config.jsn y coloca tu API key</code></pre>
+              <span class="blur-overlay" data-i18n="blur_msg">Próximamente, contáctame para recibir una versión demo</span>
+            </div>
+            <p data-i18n="step3_p">O usa el modo local sin clave (ver abajo).</p>
+          </div>
+        </details>
+
+        <details class="step">
+          <summary>
+            <span class="step__num">4</span>
+            <span class="step__title" data-i18n="step4_h">Ejecutar</span>
+          </summary>
+          <div class="step__body">
+            <div class="blur-wrap" tabindex="0" role="button" aria-label="Comando oculto — próximamente">
+              <pre class="blur-content"><code>perI bn/bot4s.pI --start</code></pre>
+              <span class="blur-overlay" data-i18n="blur_msg">Próximamente, contáctame para recibir una versión demo</span>
+            </div>
+            <p data-i18n="step4_p">Se abre la ventana. Pulsa «Escuchar» o di la palabra de activación «Botas» y habla tu comando.</p>
+          </div>
+        </details>
       </div>
 
-      <h2 class="section-title">Instalación</h2>
-      <p>BOTAS corre en GNU/Linux. El instalador detecta tu distribución automáticamente.</p>
-      <ol class="steps">
-        <li>
-          <h3>1 · Clonar el repositorio</h3>
-          <pre><code>git clone https://github.com/huesomx/B.O.T.A.S.git
-cd B.O.T.A.S</code></pre>
-          <p class="muted small">(El repositorio se hará público próximamente — ver la pestaña «Descarga y contacto».)</p>
-        </li>
-        <li>
-          <h3>2 · Instalar dependencias</h3>
-          <pre><code>sudo ./install.sh</code></pre>
-          <p>Instala Perl y sus módulos, SoX (audio), eSpeak (voz) y demás requisitos. Compatible con Debian/Ubuntu, Fedora/RHEL, Arch/Manjaro, openSUSE, Alpine y Void.</p>
-        </li>
-        <li>
-          <h3>3 · Configurar</h3>
-          <pre><code>cp config/config.json.example config/config.json
-# edita config/config.json y coloca tu API key</code></pre>
-          <p>O usa el modo local sin clave (ver abajo).</p>
-        </li>
-        <li>
-          <h3>4 · Ejecutar</h3>
-          <pre><code>perl bin/botas.pl</code></pre>
-          <p>Se abre la ventana. Pulsa <strong>«Escuchar»</strong> o di la palabra de activación <strong>«Botas»</strong> y habla tu comando.</p>
-        </li>
-      </ol>
-
-      <h2 class="section-title">Obtener una API key</h2>
+      <h2 class="section-title" data-i18n="apikeys_h">Obtener una API key</h2>
       <div class="apikeys">
         <article class="apicard">
-          <h3>OpenAI (recomendado)</h3>
-          <p>Mayor precisión (Whisper + GPT-4o).</p>
+          <h3 data-i18n="api1_h">OpenAI (recomendado)</h3>
+          <p data-i18n="api1_p">Mayor precisión (Whisper + GPT-4o).</p>
           <ol>
-            <li>Entra a <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com/api-keys</a>.</li>
-            <li>Inicia sesión y pulsa «Create new secret key».</li>
-            <li>Copia la clave (empieza con <code>sk-…</code>) en <code>config.json</code> → <code>"api_key"</code>.</li>
+            <li data-i18n="api1_s1">Entra a <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com/api-keys</a>.</li>
+            <li data-i18n="api1_s2">Inicia sesión y pulsa «Create new secret key».</li>
+            <li data-i18n="api1_s3">Copia la clave (empieza con <code>sk-…</code>) en <code>config.json</code> → <code>"api_key"</code>.</li>
           </ol>
         </article>
         <article class="apicard">
-          <h3>DeepSeek (alternativa)</h3>
-          <p>Compatible con la API de OpenAI, suele ser más económica.</p>
+          <h3 data-i18n="api2_h">DeepSeek (alternativa)</h3>
+          <p data-i18n="api2_p">Compatible con la API de OpenAI, suele ser más económica.</p>
           <ol>
-            <li>Entra a <a href="https://platform.deepseek.com" target="_blank" rel="noopener">platform.deepseek.com</a>.</li>
-            <li>Crea una API key en el panel.</li>
-            <li>Colócala en <code>config.json</code> y selecciona el proveedor DeepSeek.</li>
+            <li data-i18n="api2_s1">Entra a <a href="https://platform.deepseek.com" target="_blank" rel="noopener">platform.deepseek.com</a>.</li>
+            <li data-i18n="api2_s2">Crea una API key en el panel.</li>
+            <li data-i18n="api2_s3">Colócala en <code>config.json</code> y selecciona el proveedor DeepSeek.</li>
           </ol>
         </article>
         <article class="apicard">
-          <h3>Local · sin clave</h3>
-          <p>100&nbsp;% privado y gratis, sin internet.</p>
+          <h3 data-i18n="api3_h">Local · sin clave</h3>
+          <p data-i18n="api3_p">100&nbsp;% privado y gratis, sin internet.</p>
           <ol>
-            <li>Instala <a href="https://lmstudio.ai" target="_blank" rel="noopener">LM&nbsp;Studio</a> u <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a>.</li>
-            <li>Descarga un modelo (p.ej. DeepSeek-R1 8B).</li>
-            <li>Inicia el servidor local y apunta <code>config.json</code> a esa URL.</li>
+            <li data-i18n="api3_s1">Instala <a href="https://lmstudio.ai" target="_blank" rel="noopener">LM&nbsp;Studio</a> u <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a>.</li>
+            <li data-i18n="api3_s2">Descarga un modelo (p.ej. DeepSeek-R1 8B).</li>
+            <li data-i18n="api3_s3">Inicia el servidor local y apunta <code>config.json</code> a esa URL.</li>
           </ol>
         </article>
       </div>
@@ -224,59 +329,69 @@ cd B.O.T.A.S</code></pre>
 
     <!-- ════════════════ PESTAÑA 4 · DESCARGA Y CONTACTO ════════════════ -->
     <section class="panel" id="descarga" role="tabpanel" aria-label="Descarga y contacto">
-      <h1>Descarga</h1>
+      <h1 data-i18n="download_h1">Descarga</h1>
 
       <div class="countdown-box">
-        <p class="eyebrow">Liberación pública del repositorio</p>
+        <p class="eyebrow" data-i18n="cd_eyebrow">Liberación pública del repositorio</p>
         <div class="countdown" id="countdown" aria-live="polite">
-          <div class="cd"><span class="cd__num" data-cd="days">--</span><span class="cd__lbl">días</span></div>
-          <div class="cd"><span class="cd__num" data-cd="hours">--</span><span class="cd__lbl">horas</span></div>
-          <div class="cd"><span class="cd__num" data-cd="mins">--</span><span class="cd__lbl">min</span></div>
-          <div class="cd"><span class="cd__num" data-cd="secs">--</span><span class="cd__lbl">seg</span></div>
+          <div class="cd"><span class="cd__num" data-cd="days">--</span><span class="cd__lbl" data-i18n="cd_days">días</span></div>
+          <div class="cd"><span class="cd__num" data-cd="hours">--</span><span class="cd__lbl" data-i18n="cd_hours">horas</span></div>
+          <div class="cd"><span class="cd__num" data-cd="mins">--</span><span class="cd__lbl" data-i18n="cd_mins">min</span></div>
+          <div class="cd"><span class="cd__num" data-cd="secs">--</span><span class="cd__lbl" data-i18n="cd_secs">seg</span></div>
         </div>
-        <p class="countdown__target">Disponible el <strong>15 de agosto de 2026</strong>.</p>
-        <a class="btn btn--solid is-disabled" id="download-btn"
-           href="https://github.com/huesomx/B.O.T.A.S/releases" target="_blank" rel="noopener"
-           aria-disabled="true">Descargar (próximamente)</a>
-        <p class="muted small" id="download-note">El enlace se habilitará automáticamente cuando termine la cuenta regresiva.</p>
+        <p class="countdown__target" data-i18n="cd_target">Disponible el <strong>25 de julio de 2026</strong>.</p>
+        <div class="blur-wrap blur-wrap--btn" tabindex="0" role="button" aria-label="Descarga próximamente">
+          <a class="btn btn--solid is-disabled blur-content" id="download-btn"
+             href="https://github.com/huesomx/B0TAS-private/releases/v0.0" target="_blank" rel="noopener"
+             aria-disabled="true" data-i18n="download_btn">Descargar (próximamente)</a>
+          <span class="blur-overlay" data-i18n="blur_msg">Próximamente, contáctame para recibir una versión demo</span>
+        </div>
+        <p class="muted small" id="download-note" data-i18n="download_note">El enlace se habilitará automáticamente cuando termine la cuenta regresiva.</p>
       </div>
 
-      <h1 class="mt">Contacto y feedback</h1>
-      <p class="lead">
+      <h1 class="mt" data-i18n="contact_h1">Contacto y feedback</h1>
+      <p class="lead" data-i18n="contact_lead">
         ¿Tienes comentarios, dudas o quieres una <strong>demo privada</strong>? Escríbeme: leo
         todo lo que llega por aquí.
       </p>
 
-      <form class="contact" id="contact-form" novalidate>
-        <!-- Web3Forms: reemplaza el valor por tu access key (https://web3forms.com) -->
-        <input type="hidden" name="access_key" value="TU_ACCESS_KEY_DE_WEB3FORMS">
-        <input type="hidden" name="subject" value="Feedback / contacto desde el sitio de BOTAS">
-        <input type="hidden" name="from_name" value="Sitio BOTAS">
-        <!-- honeypot anti-spam (no llenar) -->
-        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+      <form class="contact" id="contact-form"
+            action="https://formspree.io/f/mlgvaklw"
+            method="POST"
+            data-fs-form="mlgvaklw"
+            novalidate>
+        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 
         <div class="field">
-          <label for="name">Nombre</label>
-          <input id="name" name="name" type="text" autocomplete="name" required>
+          <label for="name" data-i18n="contact_name">Nombre</label>
+          <input id="name" name="name" type="text" autocomplete="name" required data-fs-field="name">
         </div>
         <div class="field">
-          <label for="email">Correo</label>
-          <input id="email" name="email" type="email" autocomplete="email" required>
+          <label for="email" data-i18n="contact_email">Correo</label>
+          <input id="email" name="email" type="email" autocomplete="email" required data-fs-field="email">
         </div>
         <div class="field">
-          <label for="message">Mensaje</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
+          <label for="message" data-i18n="contact_message">Mensaje</label>
+          <textarea id="message" name="message" rows="5" required data-fs-field="message"></textarea>
         </div>
         <label class="check">
-          <input type="checkbox" name="demo_privada" value="Sí">
-          <span>Quiero solicitar una <strong>demo privada</strong>.</span>
+          <input type="checkbox" name="demo_privada" value="Sí" data-fs-field="demo_privada">
+          <span data-i18n="contact_demo">Quiero solicitar una <strong>demo privada</strong>.</span>
         </label>
 
-        <button type="submit" class="btn btn--solid" id="submit-btn">Enviar</button>
+        <button type="submit" class="btn btn--solid" id="submit-btn" data-fs-submit data-i18n="contact_submit">Enviar</button>
+
+        <p class="form-status form-status--success" id="form-success" data-fs-success hidden role="status" aria-live="polite" data-i18n="form_success">
+          ¡Gracias! Tu mensaje fue enviado. Te responderé pronto.
+        </p>
+        <p class="form-status form-status--error" id="form-error" data-fs-error hidden role="alert" data-i18n="form_error">
+          Hubo un problema al enviar. Inténtalo de nuevo o escríbeme directamente.
+        </p>
         <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+
         <p class="muted small">
-          ¿Prefieres tu propio correo?
-          <a id="mailto-fallback" href="mailto:aatr010423@gmail.com?subject=Feedback%20BOTAS">Escríbeme directamente</a>.
+          <span data-i18n="mailto_q">¿Prefieres tu propio correo?</span>
+          <a id="mailto-fallback" href="mailto:aatr010423@gmail.com?subject=Feedback%20BOTAS" data-i18n="mailto_link">Escríbeme directamente</a>.
         </p>
       </form>
     </section>
@@ -284,8 +399,8 @@ cd B.O.T.A.S</code></pre>
   </main>
 
   <footer class="site-foot">
-    <p>BOTAS · Universidad Tecnológica de la Mixteca · CLIHC&nbsp;2026</p>
-    <p class="muted small">Hecho con HTML, CSS y JavaScript · sin rastreadores.</p>
+    <p data-i18n="foot1">BOTAS · Universidad Tecnológica de la Mixteca · CLIHC&nbsp;2026</p>
+    <p class="muted small" data-i18n="foot2">Hecho con HTML, CSS y JavaScript · sin rastreadores.</p>
   </footer>
 
   <script src="main.js"></script>
