@@ -1,7 +1,7 @@
 # Sitio web de BOTAS (GitHub Pages)
 
 Sitio estático (HTML + CSS + JavaScript, sin framework ni build) para difundir BOTAS y recibir
-feedback. Pensado para publicarse en **GitHub Pages** en `https://huesomx.github.io/B.O.T.A.S/`.
+feedback. Pensado para publicarse en **GitHub Pages** en `https://huesomx.github.io/BOTAS-Web/`.
 
 ```
 website/
