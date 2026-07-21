@@ -64,7 +64,7 @@
       about_q2: "¿Por qué desarrollé BOTAS?",
       about_a2: "BOTAS nació durante mi <strong>servicio social</strong> en la UTM, cuando empecé a documentar cómo se construyen aplicaciones con IA generativa. Me di cuenta de algo simple: la terminal de Linux es enormemente poderosa, pero también enormemente intimidante para quien apenas llega. Quise probar si un asistente de voz, guiado por los principios de <em>IA Centrada en el Humano</em> (HCAI), podía hacer ese poder accesible sin esconder lo que pasa por debajo. De ahí salió un primer prototipo en Perl, que poco a poco fue creciendo hasta convertirse en lo que hoy es BOTAS, y que ahora forma parte de mi trabajo de tesis.",
       about_q3: "Contexto académico",
-      about_a3: "BOTAS se desarrolla en la <strong>Universidad Tecnológica de la Mixteca</strong> bajo la dirección del <strong>M.C. Ricardo Ruiz Rodríguez</strong>, y se presenta como artículo corto en <strong>AIS/IADIS&nbsp;2026</strong>.",
+      about_a3: "BOTAS se desarrolla en la <strong>Universidad Tecnológica de la Mixteca</strong> bajo la dirección del <strong>M.C. Ricardo Ruiz Rodríguez</strong>, y se presenta en la conferencia <strong>AIS&nbsp;2026</strong>, parte del congreso <strong>MCCSIS</strong> de <strong>IADIS</strong> (International Association for Development of the Information Society), celebrado en Valencia, España.",
       about_related_h: "Trabajos relacionados",
       about_related_p: "Mi acercamiento previo más directo a este tema fue mi trabajo de servicio social, donde exploré y documenté varios prototipos con IA generativa. Lo dejo aquí por si alguien quiere ver de dónde vienen muchas de las decisiones que se ven hoy en BOTAS.",
       about_related_link: "Marco Histórico y Referencial Para el Desarrollo de Aplicaciones con IA",
@@ -108,6 +108,8 @@
       contact_submit: "Solicitar acceso",
       contact_sending: "Enviando…",
       code_intro: "Este es tu código de acceso. Cópialo y pégalo en BOTAS al abrirlo:",
+      code_copy: "Copiar código",
+      code_copied: "¡Copiado!",
       code_hint: "Guárdalo: es personal y tiene un número limitado de usos de demostración.",
       form_success: "¡Gracias! Recibí tu mensaje.",
       form_error: "Hubo un problema al enviar. Inténtalo de nuevo o escríbeme directamente.",
@@ -116,7 +118,7 @@
       mailto_q: "¿Prefieres tu propio correo?",
       mailto_link: "Escríbeme directamente",
 
-      foot1: "BOTAS · Universidad Tecnológica de la Mixteca · AIS/IADIS&nbsp;2026",
+      foot1: "BOTAS · Universidad Tecnológica de la Mixteca · AIS 2026 · IADIS MCCSIS · Valencia, España",
       foot2: "Hecho con HTML, CSS y JavaScript · sin rastreadores."
     },
 
@@ -160,7 +162,7 @@
       about_q2: "Why did I build BOTAS?",
       about_a2: "BOTAS was born during my <strong>social service</strong> at UTM, when I started documenting how to build apps with generative AI. I noticed something simple: the Linux terminal is hugely powerful, but also hugely intimidating for newcomers. I wanted to see whether a voice assistant, guided by <em>Human-Centered AI</em> (HCAI) principles, could make that power accessible without hiding what's happening underneath. A first Perl prototype came out of that idea and slowly grew into what BOTAS is today — and into my thesis work.",
       about_q3: "Academic context",
-      about_a3: "BOTAS is developed at the <strong>Universidad Tecnológica de la Mixteca</strong> under the supervision of <strong>M.C. Ricardo Ruiz Rodríguez</strong>, and is presented as a short paper at <strong>AIS/IADIS&nbsp;2026</strong>.",
+      about_a3: "BOTAS is developed at the <strong>Universidad Tecnológica de la Mixteca</strong> under the supervision of <strong>M.C. Ricardo Ruiz Rodríguez</strong>, and is presented at the <strong>AIS&nbsp;2026</strong> conference, part of the <strong>MCCSIS</strong> congress by <strong>IADIS</strong> (International Association for Development of the Information Society), held in Valencia, Spain.",
       about_related_h: "Related work",
       about_related_p: "My closest previous approach to this topic was my social service work, where I explored and documented several generative-AI prototypes. I leave it here in case anyone wants to see where many of the decisions in BOTAS come from.",
       about_related_link: "Historical and Reference Framework for the Development of AI Applications",
@@ -204,6 +206,8 @@
       contact_submit: "Request access",
       contact_sending: "Sending…",
       code_intro: "This is your access code. Copy it and paste it into BOTAS when you open it:",
+      code_copy: "Copy code",
+      code_copied: "Copied!",
       code_hint: "Keep it: it's personal and has a limited number of demo uses.",
       form_success: "Thanks! I got your message.",
       form_error: "There was a problem sending. Try again or contact me directly.",
@@ -212,7 +216,7 @@
       mailto_q: "Prefer your own email?",
       mailto_link: "Write me directly",
 
-      foot1: "BOTAS · Universidad Tecnológica de la Mixteca · AIS/IADIS&nbsp;2026",
+      foot1: "BOTAS · Universidad Tecnológica de la Mixteca · AIS 2026 · IADIS MCCSIS · Valencia, España",
       foot2: "Built with HTML, CSS and JavaScript · no trackers."
     },
 
@@ -256,7 +260,7 @@
       about_q2: "Por que desenvolvi o BOTAS?",
       about_a2: "O BOTAS nasceu durante o meu <strong>serviço social</strong> na UTM, quando comecei a documentar como se constroem aplicações com IA generativa. Percebi algo simples: o terminal do Linux é enormemente poderoso, mas também enormemente intimidante para quem está chegando. Quis testar se um assistente de voz, guiado pelos princípios de <em>IA Centrada no Humano</em> (HCAI), poderia tornar esse poder acessível sem esconder o que acontece por baixo. Daí saiu um primeiro protótipo em Perl, que foi crescendo até virar o BOTAS de hoje, e que agora faz parte do meu trabalho de tese.",
       about_q3: "Contexto acadêmico",
-      about_a3: "O BOTAS é desenvolvido na <strong>Universidad Tecnológica de la Mixteca</strong> sob orientação do <strong>M.C. Ricardo Ruiz Rodríguez</strong>, e é apresentado como artigo curto na <strong>AIS/IADIS&nbsp;2026</strong>.",
+      about_a3: "O BOTAS é desenvolvido na <strong>Universidad Tecnológica de la Mixteca</strong> sob orientação do <strong>M.C. Ricardo Ruiz Rodríguez</strong>, e é apresentado na conferência <strong>AIS&nbsp;2026</strong>, parte do congresso <strong>MCCSIS</strong> da <strong>IADIS</strong> (International Association for Development of the Information Society), realizado em Valência, Espanha.",
       about_related_h: "Trabalhos relacionados",
       about_related_p: "Meu trabalho anterior mais próximo deste tema foi o meu serviço social, onde explorei e documentei vários protótipos com IA generativa. Deixo aqui caso alguém queira ver de onde vêm muitas das decisões que aparecem hoje no BOTAS.",
       about_related_link: "Marco Histórico e Referencial Para o Desenvolvimento de Aplicações com IA",
@@ -300,6 +304,8 @@
       contact_submit: "Solicitar acesso",
       contact_sending: "Enviando…",
       code_intro: "Este é o seu código de acesso. Copie e cole no BOTAS ao abri-lo:",
+      code_copy: "Copiar código",
+      code_copied: "Copiado!",
       code_hint: "Guarde-o: é pessoal e tem um número limitado de usos de demonstração.",
       form_success: "Obrigado! Recebi sua mensagem.",
       form_error: "Houve um problema ao enviar. Tente de novo ou me escreva diretamente.",
@@ -308,7 +314,7 @@
       mailto_q: "Prefere seu próprio e-mail?",
       mailto_link: "Escreva-me diretamente",
 
-      foot1: "BOTAS · Universidad Tecnológica de la Mixteca · AIS/IADIS&nbsp;2026",
+      foot1: "BOTAS · Universidad Tecnológica de la Mixteca · AIS 2026 · IADIS MCCSIS · Valencia, España",
       foot2: "Feito com HTML, CSS e JavaScript · sem rastreadores."
     }
   };
@@ -441,6 +447,37 @@
   var codeBox = $("#code-result");
   var codeVal = $("#code-value");
   var wantChk = $("#want-code");
+  var copyBtn = $("#code-copy");
+
+  // Copiar el código al portapapeles. navigator.clipboard requiere HTTPS
+  // (GitHub Pages lo es); si no está disponible, se recurre a execCommand.
+  function copyCode() {
+    var code = codeVal ? (codeVal.textContent || "").trim() : "";
+    if (!code || !copyBtn) return;
+    var done = function () {
+      copyBtn.textContent = t("code_copied");
+      setTimeout(function () { copyBtn.textContent = t("code_copy"); }, 1800);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(code).then(done).catch(fallbackCopy);
+    } else {
+      fallbackCopy();
+    }
+    function fallbackCopy() {
+      try {
+        var ta = document.createElement("textarea");
+        ta.value = code;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        done();
+      } catch (_) { /* el código sigue visible y seleccionable a mano */ }
+    }
+  }
+  if (copyBtn) copyBtn.addEventListener("click", copyCode);
 
   function setBanner(kind, msg) {
     if (ok)  { ok.hidden  = (kind !== "ok");  if (kind === "ok"  && msg) ok.innerHTML  = msg; }
