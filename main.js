@@ -6,17 +6,17 @@
    - Cuenta regresiva (25 de julio de 2026)
    - Acordeones (instalación / ejemplos con video lazy-load)
    - Blur "Próximamente" con interacción táctil
-   - Envío del formulario a Formspree vía AJAX (@formspree/ajax)
+   - Envío del formulario a Web3Forms + asignación de código vía el proxy
    =========================================================================== */
 (function () {
   "use strict";
 
   /* ---- CONFIGURACIÓN EDITABLE ------------------------------------------- */
-  var LAUNCH_DATE   = new Date("2026-07-25T00:00:00-06:00"); // 25 jul 2026, CST (Oaxaca)
-  var CONTACT_EMAIL = "aatr010423@gmail.com";
-  var FORMSPREE_ID  = "mlgvaklw";
-  var FORMSPREE_URL = "https://formspree.io/f/" + FORMSPREE_ID;
-  var STORAGE_LANG  = "botas:lang";
+  var CONTACT_EMAIL     = "aatr010423@gmail.com";
+  var WEB3FORMS_KEY     = "536b060c-0df6-42cf-b365-0dd82c584ffb"; // access_key de Web3Forms
+  var WEB3FORMS_URL     = "https://api.web3forms.com/submit";
+  var REQUEST_CODE_URL  = "https://botas-proxy.hudesde.workers.dev/request-code"; // asigna un código de acceso
+  var STORAGE_LANG      = "botas:lang";
   /* ----------------------------------------------------------------------- */
 
   var $  = function (s, c) { return (c || document).querySelector(s); };
@@ -64,7 +64,7 @@
       about_q2: "¿Por qué desarrollé BOTAS?",
       about_a2: "BOTAS nació durante mi <strong>servicio social</strong> en la UTM, cuando empecé a documentar cómo se construyen aplicaciones con IA generativa. Me di cuenta de algo simple: la terminal de Linux es enormemente poderosa, pero también enormemente intimidante para quien apenas llega. Quise probar si un asistente de voz, guiado por los principios de <em>IA Centrada en el Humano</em> (HCAI), podía hacer ese poder accesible sin esconder lo que pasa por debajo. De ahí salió un primer prototipo en Perl, que poco a poco fue creciendo hasta convertirse en lo que hoy es BOTAS, y que ahora forma parte de mi trabajo de tesis.",
       about_q3: "Contexto académico",
-      about_a3: "BOTAS se desarrolla en la <strong>Universidad Tecnológica de la Mixteca</strong> bajo la dirección del <strong>M.C. Ricardo Ruiz Rodríguez</strong>, y se presenta como artículo corto en <strong>CLIHC&nbsp;2026</strong>.",
+      about_a3: "BOTAS se desarrolla en la <strong>Universidad Tecnológica de la Mixteca</strong> bajo la dirección del <strong>M.C. Ricardo Ruiz Rodríguez</strong>, y se presenta como artículo corto en <strong>AIS/IADIS&nbsp;2026</strong>.",
       about_related_h: "Trabajos relacionados",
       about_related_p: "Mi acercamiento previo más directo a este tema fue mi trabajo de servicio social, donde exploré y documenté varios prototipos con IA generativa. Lo dejo aquí por si alguien quiere ver de dónde vienen muchas de las decisiones que se ven hoy en BOTAS.",
       about_related_link: "Marco Histórico y Referencial Para el Desarrollo de Aplicaciones con IA",
@@ -82,56 +82,41 @@
       confirm_caption: "BOTAS muestra el comando y pide confirmación antes de ejecutar.",
 
       install_h: "Instalación",
-      install_lead: "BOTAS corre en GNU/Linux. El instalador detecta tu distribución automáticamente. Despliega cada paso para ver los detalles.",
-      step1_h: "Clonar el repositorio",
-      step1_p: "El repositorio aún es privado mientras pulimos la primera versión pública.",
-      step2_h: "Instalar dependencias",
-      step2_p: "Instala Perl y sus módulos, SoX (audio), eSpeak (voz) y demás requisitos. Compatible con Debian/Ubuntu, Fedora/RHEL, Arch/Manjaro, openSUSE, Alpine y Void.",
-      step3_h: "Configurar",
-      step3_p: "O usa el modo local sin clave (ver abajo).",
-      step4_h: "Ejecutar",
-      step4_p: "Se abre la ventana. Pulsa «Escuchar» o di la palabra de activación «Botas» y habla tu comando.",
-      blur_msg: "Próximamente, contáctame para recibir una versión demo",
+      install_lead: "BOTAS corre en GNU/Linux. El instalador detecta tu distribución automáticamente (Debian/Ubuntu, Fedora, Arch/Manjaro, openSUSE, Alpine y Void). Despliega cada paso para ver los detalles.",
+      step1_h: "Instalar BOTAS",
+      step1_p: "Un solo comando. El instalador detecta tu distribución e instala Perl y sus módulos, SoX (audio), eSpeak (voz), el modelo de reconocimiento y demás requisitos. Requiere conexión a internet la primera vez.",
+      step2_h: "Activar con tu código",
+      step2_p: "Abre <strong>BOTAS</strong> desde el menú de aplicaciones. La primera vez te pedirá tu <strong>código de acceso</strong> en una ventana: escríbelo y pulsa «Activar». Solo se hace una vez. ¿No tienes código? Pídelo en la pestaña <em>Descarga y contacto</em>.",
+      step3_h: "Usar",
+      step3_p: "Escribe tu petición o pulsa «Escuchar» y habla. También puedes activar el <strong>Modo Atención</strong> y decir la palabra «Botas» seguida de tu comando. El botón «Explicar» te muestra el comando de terminal equivalente.",
 
-      apikeys_h: "Obtener una API key",
-      api1_h: "OpenAI (recomendado)", api1_p: "Mayor precisión (Whisper + GPT-4o).",
-      api1_s1: 'Entra a <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com/api-keys</a>.',
-      api1_s2: "Inicia sesión y pulsa «Create new secret key».",
-      api1_s3: 'Copia la clave (empieza con <code>sk-…</code>) en <code>config.json</code> → <code>"api_key"</code>.',
-      api2_h: "DeepSeek (alternativa)", api2_p: "Compatible con la API de OpenAI, suele ser más económica.",
-      api2_s1: 'Entra a <a href="https://platform.deepseek.com" target="_blank" rel="noopener">platform.deepseek.com</a>.',
-      api2_s2: "Crea una API key en el panel.",
-      api2_s3: "Colócala en <code>config.json</code> y selecciona el proveedor DeepSeek.",
-      api3_h: "Local · sin clave", api3_p: "100&nbsp;% privado y gratis, sin internet.",
-      api3_s1: 'Instala <a href="https://lmstudio.ai" target="_blank" rel="noopener">LM&nbsp;Studio</a> u <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a>.',
-      api3_s2: "Descarga un modelo (p.ej. DeepSeek-R1 8B).",
-      api3_s3: "Inicia el servidor local y apunta <code>config.json</code> a esa URL.",
+      code_h: "Tu código de acceso",
+      code_p: "La versión de demostración se conecta a la IA a través de un <strong>servidor intermedio</strong>, así que <strong>no necesitas ninguna API key</strong> ni configurar nada: solo tu código de acceso. Cada código incluye un número limitado de peticiones para que puedas probar BOTAS. Pídelo gratis en la pestaña <em>Descarga y contacto</em> y lo recibirás al instante.",
 
-      download_h1: "Descarga",
-      cd_eyebrow: "Liberación pública del repositorio",
-      cd_days: "días", cd_hours: "horas", cd_mins: "min", cd_secs: "seg",
-      cd_target: "Disponible el <strong>25 de julio de 2026</strong>.",
-      cd_live: "<strong>¡Ya está disponible!</strong>",
-      download_btn: "Descargar (próximamente)",
-      download_btn_live: "Descargar BOTAS",
-      download_note: "El enlace se habilitará automáticamente cuando termine la cuenta regresiva.",
-      download_note_live: "Gracias por tu interés. ¡Que lo disfrutes!",
+      download_h1: "Descarga y acceso",
+      dl_eyebrow: "Versión de demostración · disponible ahora",
+      dl_lead: "Instala BOTAS con un solo comando en tu terminal de GNU/Linux:",
+      dl_note: "Al abrir BOTAS por primera vez te pedirá un <strong>código de acceso</strong>. Solicítalo gratis en el formulario de abajo: lo recibes al instante.",
 
-      contact_h1: "Contacto y feedback",
-      contact_lead: "¿Tienes comentarios, dudas o quieres una <strong>demo privada</strong>? Escríbeme: leo todo lo que llega por aquí.",
+      contact_h1: "Solicita tu código y contacto",
+      contact_lead: "Déjame tu correo y te asigno un <strong>código de acceso</strong> para probar BOTAS. ¿Dudas o comentarios? Escríbelos también: leo todo lo que llega por aquí.",
       contact_name: "Nombre",
       contact_email: "Correo",
       contact_message: "Mensaje",
-      contact_demo: "Quiero solicitar una <strong>demo privada</strong>.",
-      contact_submit: "Enviar",
+      contact_message_opt: "(opcional)",
+      contact_demo: "Quiero un <strong>código de acceso</strong> para probar BOTAS.",
+      contact_submit: "Solicitar acceso",
       contact_sending: "Enviando…",
-      form_success: "¡Gracias! Tu mensaje fue enviado. Te responderé pronto.",
+      code_intro: "Este es tu código de acceso. Cópialo y pégalo en BOTAS al abrirlo:",
+      code_hint: "Guárdalo: es personal y tiene un número limitado de usos de demostración.",
+      form_success: "¡Gracias! Recibí tu mensaje.",
       form_error: "Hubo un problema al enviar. Inténtalo de nuevo o escríbeme directamente.",
       form_invalid: "Revisa los campos requeridos.",
+      form_nocodes: "Por ahora no quedan códigos de demostración disponibles. Escríbeme y te aviso en cuanto haya.",
       mailto_q: "¿Prefieres tu propio correo?",
       mailto_link: "Escríbeme directamente",
 
-      foot1: "BOTAS · Universidad Tecnológica de la Mixteca · CLIHC&nbsp;2026",
+      foot1: "BOTAS · Universidad Tecnológica de la Mixteca · AIS/IADIS&nbsp;2026",
       foot2: "Hecho con HTML, CSS y JavaScript · sin rastreadores."
     },
 
@@ -175,7 +160,7 @@
       about_q2: "Why did I build BOTAS?",
       about_a2: "BOTAS was born during my <strong>social service</strong> at UTM, when I started documenting how to build apps with generative AI. I noticed something simple: the Linux terminal is hugely powerful, but also hugely intimidating for newcomers. I wanted to see whether a voice assistant, guided by <em>Human-Centered AI</em> (HCAI) principles, could make that power accessible without hiding what's happening underneath. A first Perl prototype came out of that idea and slowly grew into what BOTAS is today — and into my thesis work.",
       about_q3: "Academic context",
-      about_a3: "BOTAS is developed at the <strong>Universidad Tecnológica de la Mixteca</strong> under the supervision of <strong>M.C. Ricardo Ruiz Rodríguez</strong>, and is presented as a short paper at <strong>CLIHC&nbsp;2026</strong>.",
+      about_a3: "BOTAS is developed at the <strong>Universidad Tecnológica de la Mixteca</strong> under the supervision of <strong>M.C. Ricardo Ruiz Rodríguez</strong>, and is presented as a short paper at <strong>AIS/IADIS&nbsp;2026</strong>.",
       about_related_h: "Related work",
       about_related_p: "My closest previous approach to this topic was my social service work, where I explored and documented several generative-AI prototypes. I leave it here in case anyone wants to see where many of the decisions in BOTAS come from.",
       about_related_link: "Historical and Reference Framework for the Development of AI Applications",
@@ -193,56 +178,41 @@
       confirm_caption: "BOTAS shows the command and asks for confirmation before running.",
 
       install_h: "Installation",
-      install_lead: "BOTAS runs on GNU/Linux. The installer detects your distribution automatically. Expand each step for details.",
-      step1_h: "Clone the repository",
-      step1_p: "The repository is still private while we polish the first public release.",
-      step2_h: "Install dependencies",
-      step2_p: "Installs Perl and its modules, SoX (audio), eSpeak (voice) and other requirements. Compatible with Debian/Ubuntu, Fedora/RHEL, Arch/Manjaro, openSUSE, Alpine and Void.",
-      step3_h: "Configure",
-      step3_p: "Or use the local key-less mode (see below).",
-      step4_h: "Run",
-      step4_p: "The window opens. Click “Listen” or say the wake word “Botas” and speak your command.",
-      blur_msg: "Coming soon — contact me to receive a demo version",
+      install_lead: "BOTAS runs on GNU/Linux. The installer detects your distribution automatically (Debian/Ubuntu, Fedora, Arch/Manjaro, openSUSE, Alpine and Void). Expand each step for details.",
+      step1_h: "Install BOTAS",
+      step1_p: "A single command. The installer detects your distribution and installs Perl and its modules, SoX (audio), eSpeak (voice), the recognition model and other requirements. Needs an internet connection the first time.",
+      step2_h: "Activate with your code",
+      step2_p: "Open <strong>BOTAS</strong> from your applications menu. The first time it will ask for your <strong>access code</strong> in a window: type it and click “Activate”. Only once. No code yet? Request one in the <em>Download & contact</em> tab.",
+      step3_h: "Use it",
+      step3_p: "Type your request or click “Listen” and speak. You can also enable <strong>Attention Mode</strong> and say the wake word “Botas” followed by your command. The “Explain” button shows the equivalent terminal command.",
 
-      apikeys_h: "Getting an API key",
-      api1_h: "OpenAI (recommended)", api1_p: "Highest accuracy (Whisper + GPT-4o).",
-      api1_s1: 'Go to <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com/api-keys</a>.',
-      api1_s2: "Log in and click “Create new secret key”.",
-      api1_s3: 'Paste the key (starts with <code>sk-…</code>) into <code>config.json</code> → <code>"api_key"</code>.',
-      api2_h: "DeepSeek (alternative)", api2_p: "OpenAI-compatible API, usually cheaper.",
-      api2_s1: 'Go to <a href="https://platform.deepseek.com" target="_blank" rel="noopener">platform.deepseek.com</a>.',
-      api2_s2: "Create an API key in the dashboard.",
-      api2_s3: "Place it in <code>config.json</code> and select the DeepSeek provider.",
-      api3_h: "Local · no key", api3_p: "100% private and free, no internet.",
-      api3_s1: 'Install <a href="https://lmstudio.ai" target="_blank" rel="noopener">LM&nbsp;Studio</a> or <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a>.',
-      api3_s2: "Download a model (e.g. DeepSeek-R1 8B).",
-      api3_s3: "Start the local server and point <code>config.json</code> at that URL.",
+      code_h: "Your access code",
+      code_p: "The demo version connects to the AI through an <strong>intermediate server</strong>, so you <strong>don't need any API key</strong> or configuration: just your access code. Each code includes a limited number of requests so you can try BOTAS. Request one for free in the <em>Download & contact</em> tab and get it instantly.",
 
-      download_h1: "Download",
-      cd_eyebrow: "Public release of the repository",
-      cd_days: "days", cd_hours: "hours", cd_mins: "min", cd_secs: "sec",
-      cd_target: "Available on <strong>July 25, 2026</strong>.",
-      cd_live: "<strong>It's available now!</strong>",
-      download_btn: "Download (coming soon)",
-      download_btn_live: "Download BOTAS",
-      download_note: "The link will be enabled automatically when the countdown ends.",
-      download_note_live: "Thanks for your interest. Enjoy!",
+      download_h1: "Download & access",
+      dl_eyebrow: "Demo version · available now",
+      dl_lead: "Install BOTAS with a single command in your GNU/Linux terminal:",
+      dl_note: "The first time you open BOTAS it will ask for an <strong>access code</strong>. Request it for free in the form below — you get it instantly.",
 
-      contact_h1: "Contact & feedback",
-      contact_lead: "Feedback, questions, or want a <strong>private demo</strong>? Write me — I read everything that comes in here.",
+      contact_h1: "Request your code & contact",
+      contact_lead: "Leave me your email and I'll assign you an <strong>access code</strong> to try BOTAS. Questions or feedback? Write them too — I read everything that comes in here.",
       contact_name: "Name",
       contact_email: "Email",
       contact_message: "Message",
-      contact_demo: "I want to request a <strong>private demo</strong>.",
-      contact_submit: "Send",
+      contact_message_opt: "(optional)",
+      contact_demo: "I want an <strong>access code</strong> to try BOTAS.",
+      contact_submit: "Request access",
       contact_sending: "Sending…",
-      form_success: "Thanks! Your message was sent. I'll reply soon.",
+      code_intro: "This is your access code. Copy it and paste it into BOTAS when you open it:",
+      code_hint: "Keep it: it's personal and has a limited number of demo uses.",
+      form_success: "Thanks! I got your message.",
       form_error: "There was a problem sending. Try again or contact me directly.",
       form_invalid: "Please check the required fields.",
+      form_nocodes: "No demo codes are available right now. Write me and I'll let you know as soon as there are.",
       mailto_q: "Prefer your own email?",
       mailto_link: "Write me directly",
 
-      foot1: "BOTAS · Universidad Tecnológica de la Mixteca · CLIHC&nbsp;2026",
+      foot1: "BOTAS · Universidad Tecnológica de la Mixteca · AIS/IADIS&nbsp;2026",
       foot2: "Built with HTML, CSS and JavaScript · no trackers."
     },
 
@@ -286,7 +256,7 @@
       about_q2: "Por que desenvolvi o BOTAS?",
       about_a2: "O BOTAS nasceu durante o meu <strong>serviço social</strong> na UTM, quando comecei a documentar como se constroem aplicações com IA generativa. Percebi algo simples: o terminal do Linux é enormemente poderoso, mas também enormemente intimidante para quem está chegando. Quis testar se um assistente de voz, guiado pelos princípios de <em>IA Centrada no Humano</em> (HCAI), poderia tornar esse poder acessível sem esconder o que acontece por baixo. Daí saiu um primeiro protótipo em Perl, que foi crescendo até virar o BOTAS de hoje, e que agora faz parte do meu trabalho de tese.",
       about_q3: "Contexto acadêmico",
-      about_a3: "O BOTAS é desenvolvido na <strong>Universidad Tecnológica de la Mixteca</strong> sob orientação do <strong>M.C. Ricardo Ruiz Rodríguez</strong>, e é apresentado como artigo curto na <strong>CLIHC&nbsp;2026</strong>.",
+      about_a3: "O BOTAS é desenvolvido na <strong>Universidad Tecnológica de la Mixteca</strong> sob orientação do <strong>M.C. Ricardo Ruiz Rodríguez</strong>, e é apresentado como artigo curto na <strong>AIS/IADIS&nbsp;2026</strong>.",
       about_related_h: "Trabalhos relacionados",
       about_related_p: "Meu trabalho anterior mais próximo deste tema foi o meu serviço social, onde explorei e documentei vários protótipos com IA generativa. Deixo aqui caso alguém queira ver de onde vêm muitas das decisões que aparecem hoje no BOTAS.",
       about_related_link: "Marco Histórico e Referencial Para o Desenvolvimento de Aplicações com IA",
@@ -304,56 +274,41 @@
       confirm_caption: "O BOTAS mostra o comando e pede confirmação antes de executar.",
 
       install_h: "Instalação",
-      install_lead: "O BOTAS roda em GNU/Linux. O instalador detecta sua distribuição automaticamente. Expanda cada passo para ver os detalhes.",
-      step1_h: "Clonar o repositório",
-      step1_p: "O repositório ainda é privado enquanto polimos a primeira versão pública.",
-      step2_h: "Instalar dependências",
-      step2_p: "Instala Perl e seus módulos, SoX (áudio), eSpeak (voz) e demais requisitos. Compatível com Debian/Ubuntu, Fedora/RHEL, Arch/Manjaro, openSUSE, Alpine e Void.",
-      step3_h: "Configurar",
-      step3_p: "Ou use o modo local sem chave (veja abaixo).",
-      step4_h: "Executar",
-      step4_p: "A janela se abre. Clique em «Escutar» ou diga a palavra de ativação «Botas» e fale seu comando.",
-      blur_msg: "Em breve, contate-me para receber uma versão demo",
+      install_lead: "O BOTAS roda em GNU/Linux. O instalador detecta sua distribuição automaticamente (Debian/Ubuntu, Fedora, Arch/Manjaro, openSUSE, Alpine e Void). Expanda cada passo para ver os detalhes.",
+      step1_h: "Instalar o BOTAS",
+      step1_p: "Um único comando. O instalador detecta sua distribuição e instala Perl e seus módulos, SoX (áudio), eSpeak (voz), o modelo de reconhecimento e demais requisitos. Precisa de conexão com a internet na primeira vez.",
+      step2_h: "Ativar com seu código",
+      step2_p: "Abra o <strong>BOTAS</strong> no menu de aplicativos. Na primeira vez ele pedirá seu <strong>código de acesso</strong> em uma janela: digite-o e clique em «Ativar». Só uma vez. Não tem código? Peça na aba <em>Download & contato</em>.",
+      step3_h: "Usar",
+      step3_p: "Digite seu pedido ou clique em «Escutar» e fale. Você também pode ativar o <strong>Modo Atenção</strong> e dizer a palavra «Botas» seguida do seu comando. O botão «Explicar» mostra o comando de terminal equivalente.",
 
-      apikeys_h: "Obter uma API key",
-      api1_h: "OpenAI (recomendado)", api1_p: "Maior precisão (Whisper + GPT-4o).",
-      api1_s1: 'Acesse <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com/api-keys</a>.',
-      api1_s2: "Faça login e clique em «Create new secret key».",
-      api1_s3: 'Copie a chave (começa com <code>sk-…</code>) em <code>config.json</code> → <code>"api_key"</code>.',
-      api2_h: "DeepSeek (alternativa)", api2_p: "Compatível com a API da OpenAI, costuma ser mais econômica.",
-      api2_s1: 'Acesse <a href="https://platform.deepseek.com" target="_blank" rel="noopener">platform.deepseek.com</a>.',
-      api2_s2: "Crie uma API key no painel.",
-      api2_s3: "Coloque-a em <code>config.json</code> e selecione o provedor DeepSeek.",
-      api3_h: "Local · sem chave", api3_p: "100% privado e gratuito, sem internet.",
-      api3_s1: 'Instale <a href="https://lmstudio.ai" target="_blank" rel="noopener">LM&nbsp;Studio</a> ou <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a>.',
-      api3_s2: "Baixe um modelo (p.ex. DeepSeek-R1 8B).",
-      api3_s3: "Inicie o servidor local e aponte o <code>config.json</code> para essa URL.",
+      code_h: "Seu código de acesso",
+      code_p: "A versão de demonstração se conecta à IA através de um <strong>servidor intermediário</strong>, então você <strong>não precisa de nenhuma API key</strong> nem de configurar nada: só do seu código de acesso. Cada código inclui um número limitado de requisições para você experimentar o BOTAS. Peça grátis na aba <em>Download & contato</em> e receba na hora.",
 
-      download_h1: "Download",
-      cd_eyebrow: "Liberação pública do repositório",
-      cd_days: "dias", cd_hours: "horas", cd_mins: "min", cd_secs: "seg",
-      cd_target: "Disponível em <strong>25 de julho de 2026</strong>.",
-      cd_live: "<strong>Já está disponível!</strong>",
-      download_btn: "Baixar (em breve)",
-      download_btn_live: "Baixar BOTAS",
-      download_note: "O link será habilitado automaticamente quando a contagem regressiva terminar.",
-      download_note_live: "Obrigado pelo interesse. Aproveite!",
+      download_h1: "Download e acesso",
+      dl_eyebrow: "Versão de demonstração · disponível agora",
+      dl_lead: "Instale o BOTAS com um único comando no seu terminal GNU/Linux:",
+      dl_note: "Ao abrir o BOTAS pela primeira vez ele pedirá um <strong>código de acesso</strong>. Solicite grátis no formulário abaixo — você recebe na hora.",
 
-      contact_h1: "Contato e feedback",
-      contact_lead: "Comentários, dúvidas ou quer uma <strong>demo privada</strong>? Escreva — eu leio tudo que chega por aqui.",
+      contact_h1: "Solicite seu código e contato",
+      contact_lead: "Deixe seu e-mail e eu te atribuo um <strong>código de acesso</strong> para experimentar o BOTAS. Dúvidas ou comentários? Escreva também — eu leio tudo que chega por aqui.",
       contact_name: "Nome",
       contact_email: "E-mail",
       contact_message: "Mensagem",
-      contact_demo: "Quero solicitar uma <strong>demo privada</strong>.",
-      contact_submit: "Enviar",
+      contact_message_opt: "(opcional)",
+      contact_demo: "Quero um <strong>código de acesso</strong> para experimentar o BOTAS.",
+      contact_submit: "Solicitar acesso",
       contact_sending: "Enviando…",
-      form_success: "Obrigado! Sua mensagem foi enviada. Responderei em breve.",
+      code_intro: "Este é o seu código de acesso. Copie e cole no BOTAS ao abri-lo:",
+      code_hint: "Guarde-o: é pessoal e tem um número limitado de usos de demonstração.",
+      form_success: "Obrigado! Recebi sua mensagem.",
       form_error: "Houve um problema ao enviar. Tente de novo ou me escreva diretamente.",
       form_invalid: "Revise os campos obrigatórios.",
+      form_nocodes: "No momento não há códigos de demonstração disponíveis. Escreva-me e aviso assim que houver.",
       mailto_q: "Prefere seu próprio e-mail?",
       mailto_link: "Escreva-me diretamente",
 
-      foot1: "BOTAS · Universidad Tecnológica de la Mixteca · CLIHC&nbsp;2026",
+      foot1: "BOTAS · Universidad Tecnológica de la Mixteca · AIS/IADIS&nbsp;2026",
       foot2: "Feito com HTML, CSS e JavaScript · sem rastreadores."
     }
   };
@@ -400,8 +355,6 @@
     $$(".lang-switch button").forEach(function (b) {
       b.classList.toggle("is-active", b.getAttribute("data-lang") === lang);
     });
-
-    refreshCountdownLabels();
 
     try { localStorage.setItem(STORAGE_LANG, lang); } catch (_) {}
   }
@@ -460,86 +413,6 @@
     });
   });
 
-  /* ===== Cuenta regresiva =============================================== */
-  var box        = $(".countdown-box");
-  var dlBtn      = $("#download-btn");
-  var dlNote     = $("#download-note");
-  var targetTxt  = $(".countdown__target");
-  var fields     = {
-    days:  $('[data-cd="days"]'),
-    hours: $('[data-cd="hours"]'),
-    mins:  $('[data-cd="mins"]'),
-    secs:  $('[data-cd="secs"]')
-  };
-  var isLive = false;
-  var pad = function (n) { return (n < 10 ? "0" : "") + n; };
-
-  function refreshCountdownLabels() {
-    if (!targetTxt) return;
-    if (isLive) {
-      targetTxt.innerHTML = t("cd_live");
-      if (dlBtn) dlBtn.textContent = t("download_btn_live");
-      if (dlNote) dlNote.textContent = t("download_note_live");
-    } else {
-      targetTxt.innerHTML = t("cd_target");
-      if (dlBtn) dlBtn.textContent = t("download_btn");
-      if (dlNote) dlNote.textContent = t("download_note");
-    }
-  }
-
-  function launchReady() {
-    isLive = true;
-    if (box) box.classList.add("is-live");
-    if (dlBtn) {
-      dlBtn.classList.remove("is-disabled");
-      dlBtn.removeAttribute("aria-disabled");
-      var wrap = dlBtn.closest(".blur-wrap");
-      if (wrap) {
-        wrap.classList.remove("blur-wrap", "blur-wrap--btn");
-        dlBtn.classList.remove("blur-content");
-        var ov = wrap.querySelector(".blur-overlay");
-        if (ov) ov.remove();
-      }
-    }
-    refreshCountdownLabels();
-  }
-
-  function tick() {
-    var diff = LAUNCH_DATE.getTime() - Date.now();
-    if (diff <= 0) { launchReady(); clearInterval(timer); return; }
-    var s = Math.floor(diff / 1000);
-    var d = Math.floor(s / 86400); s -= d * 86400;
-    var h = Math.floor(s / 3600);  s -= h * 3600;
-    var m = Math.floor(s / 60);    s -= m * 60;
-    if (fields.days)  fields.days.textContent  = d;
-    if (fields.hours) fields.hours.textContent = pad(h);
-    if (fields.mins)  fields.mins.textContent  = pad(m);
-    if (fields.secs)  fields.secs.textContent  = pad(s);
-  }
-  var timer;
-  if (box) { tick(); timer = setInterval(tick, 1000); }
-
-  /* ===== Blur "Próximamente" — soporte táctil ============================= */
-  $$(".blur-wrap").forEach(function (wrap) {
-    wrap.addEventListener("click", function (e) {
-      e.preventDefault();
-      var wasRevealed = wrap.classList.contains("is-revealed");
-      $$(".blur-wrap.is-revealed").forEach(function (w) { w.classList.remove("is-revealed"); });
-      if (!wasRevealed) wrap.classList.add("is-revealed");
-    });
-    wrap.addEventListener("keydown", function (e) {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        wrap.classList.toggle("is-revealed");
-      }
-    });
-  });
-  document.addEventListener("click", function (e) {
-    if (!e.target.closest(".blur-wrap")) {
-      $$(".blur-wrap.is-revealed").forEach(function (w) { w.classList.remove("is-revealed"); });
-    }
-  });
-
   /* ===== Ejemplos: lazy-load del <source> sólo al abrir =================== */
   $$(".example").forEach(function (det) {
     det.addEventListener("toggle", function () {
@@ -559,12 +432,15 @@
     });
   });
 
-  /* ===== Formulario de contacto (Formspree AJAX) ========================= */
+  /* ===== Formulario: contacto (Web3Forms) + asignación de código ========= */
   var form    = $("#contact-form");
   var status  = $("#form-status");
   var ok      = $("#form-success");
   var err     = $("#form-error");
   var submit  = $("#submit-btn");
+  var codeBox = $("#code-result");
+  var codeVal = $("#code-value");
+  var wantChk = $("#want-code");
 
   function setBanner(kind, msg) {
     if (ok)  { ok.hidden  = (kind !== "ok");  if (kind === "ok"  && msg) ok.innerHTML  = msg; }
@@ -575,22 +451,43 @@
     }
   }
 
-  function tryFormspreeLib() {
-    if (!form || !window.formspree) return false;
-    try {
-      if (typeof window.formspree.init === "function") {
-        window.formspree.init();
-      }
-      return true;
-    } catch (_) { return false; }
+  function showCode(code) {
+    if (codeVal) codeVal.textContent = code;
+    if (codeBox) {
+      codeBox.hidden = false;
+      codeBox.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    setBanner("none");
+  }
+
+  // Envía el contacto a Web3Forms (para que me llegue por correo).
+  function sendContact() {
+    var data = new FormData(form);
+    data.append("access_key", WEB3FORMS_KEY);
+    data.append("subject", "Solicitud de acceso · BOTAS");
+    data.append("from_name", "Sitio BOTAS");
+    return fetch(WEB3FORMS_URL, { method: "POST", body: data })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { return !!(j && j.success); })
+      .catch(function () { return false; });
+  }
+
+  // Pide al proxy un código de acceso para este correo. Devuelve
+  // { code } | { error } | null (sin red).
+  function requestCode(email, name) {
+    return fetch(REQUEST_CODE_URL, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ email: email, name: name || "" })
+    })
+      .then(function (r) { return r.json().then(function (j) { return j; }); })
+      .catch(function () { return null; });
   }
 
   if (form) {
-    window.addEventListener("load", tryFormspreeLib);
-
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (form._gotcha && form._gotcha.value) return;
+      if (form.botcheck && form.botcheck.checked) return; // honeypot
 
       if (!form.checkValidity()) {
         setBanner("err", t("form_invalid"));
@@ -598,36 +495,39 @@
         return;
       }
 
-      var data = new FormData(form);
+      var email = (form.email && form.email.value || "").trim();
+      var name  = (form.name && form.name.value || "").trim();
+      var wantCode = wantChk ? wantChk.checked : true;
+
       if (submit) { submit.disabled = true; submit.textContent = t("contact_sending"); }
       setBanner("sending", t("contact_sending"));
 
-      fetch(FORMSPREE_URL, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: data
-      })
-        .then(function (r) {
-          return r.json().then(function (j) { return { ok: r.ok, body: j }; });
-        })
-        .then(function (res) {
-          if (res.ok) {
-            setBanner("ok", t("form_success"));
-            form.reset();
-          } else {
-            var msg = t("form_error");
-            if (res.body && Array.isArray(res.body.errors) && res.body.errors.length) {
-              msg = res.body.errors.map(function (er) { return er.message; }).join(" · ");
-            }
-            setBanner("err", msg);
-          }
-        })
-        .catch(function () {
+      Promise.all([
+        sendContact(),
+        wantCode ? requestCode(email, name) : Promise.resolve(null)
+      ]).then(function (res) {
+        var contactOk = res[0];
+        var codeRes   = res[1];
+        var gotCode   = false;
+
+        if (codeRes && codeRes.code) {
+          showCode(codeRes.code);
+          gotCode = true;
+        } else if (codeRes && codeRes.error === "sin_codigos") {
+          setBanner("err", t("form_nocodes"));
+        }
+
+        if (gotCode) {
+          form.reset();                 // el código mostrado es el feedback
+        } else if (contactOk) {
+          setBanner("ok", t("form_success"));
+          form.reset();
+        } else if (!(codeRes && codeRes.error === "sin_codigos")) {
           setBanner("err", t("form_error") + " " + CONTACT_EMAIL);
-        })
-        .finally(function () {
-          if (submit) { submit.disabled = false; submit.textContent = t("contact_submit"); }
-        });
+        }
+      }).finally(function () {
+        if (submit) { submit.disabled = false; submit.textContent = t("contact_submit"); }
+      });
     });
   }
 

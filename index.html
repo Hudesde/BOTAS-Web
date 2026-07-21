@@ -11,7 +11,6 @@
   <meta property="og:title" content="BOTAS — Asistente de voz para GNU/Linux">
   <meta property="og:description" content="Habla con tu sistema operativo. Menos comandos memorizados, menos clics.">
   <meta property="og:type" content="website">
-  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </head>
 <body>
 
@@ -135,7 +134,7 @@
         <p data-i18n="about_a3">
           BOTAS se desarrolla en la <strong>Universidad Tecnológica de la Mixteca</strong>
           bajo la dirección del <strong>M.C. Ricardo Ruiz Rodríguez</strong>, y se presenta
-          como artículo corto en <strong>CLIHC&nbsp;2026</strong>.
+          como artículo corto en <strong>AIS/IADIS&nbsp;2026</strong>.
         </p>
 
         <h2 data-i18n="about_related_h">Trabajos relacionados</h2>
@@ -213,165 +212,114 @@
       </figure>
 
       <h2 class="section-title" data-i18n="install_h">Instalación</h2>
-      <p data-i18n="install_lead">BOTAS corre en GNU/Linux. El instalador detecta tu distribución automáticamente. Despliega cada paso para ver los detalles.</p>
+      <p data-i18n="install_lead">BOTAS corre en GNU/Linux. El instalador detecta tu distribución automáticamente (Debian/Ubuntu, Fedora, Arch/Manjaro, openSUSE, Alpine y Void). Despliega cada paso para ver los detalles.</p>
 
       <div class="steps">
         <details class="step" open>
           <summary>
             <span class="step__num">1</span>
-            <span class="step__title" data-i18n="step1_h">Clonar el repositorio</span>
+            <span class="step__title" data-i18n="step1_h">Instalar BOTAS</span>
           </summary>
           <div class="step__body">
-            <div class="blur-wrap" tabindex="0" role="button" aria-label="Comando oculto — próximamente">
-              <pre class="blur-content"><code>gti clne https://github.com/huesomx/B0TAS--private.gti
-cd B0TAS--private</code></pre>
-              <span class="blur-overlay" data-i18n="blur_msg">Próximamente, contáctame para recibir una versión demo</span>
-            </div>
-            <p class="muted small" data-i18n="step1_p">El repositorio aún es privado mientras pulimos la primera versión pública.</p>
+            <pre class="cmd"><code>git clone https://github.com/Hudesde/BOTAS-DEMO.git
+cd BOTAS-DEMO
+sudo bash install.sh</code></pre>
+            <p data-i18n="step1_p">Un solo comando. El instalador detecta tu distribución e instala Perl y sus módulos, SoX (audio), eSpeak (voz), el modelo de reconocimiento y demás requisitos. Requiere conexión a internet la primera vez.</p>
           </div>
         </details>
 
         <details class="step">
           <summary>
             <span class="step__num">2</span>
-            <span class="step__title" data-i18n="step2_h">Instalar dependencias</span>
+            <span class="step__title" data-i18n="step2_h">Activar con tu código</span>
           </summary>
           <div class="step__body">
-            <div class="blur-wrap" tabindex="0" role="button" aria-label="Comando oculto — próximamente">
-              <pre class="blur-content"><code>suudo ./instaIl.sh --no-such-flag</code></pre>
-              <span class="blur-overlay" data-i18n="blur_msg">Próximamente, contáctame para recibir una versión demo</span>
-            </div>
-            <p data-i18n="step2_p">Instala Perl y sus módulos, SoX (audio), eSpeak (voz) y demás requisitos. Compatible con Debian/Ubuntu, Fedora/RHEL, Arch/Manjaro, openSUSE, Alpine y Void.</p>
+            <p data-i18n="step2_p">Abre <strong>BOTAS</strong> desde el menú de aplicaciones. La primera vez te pedirá tu <strong>código de acceso</strong> en una ventana: escríbelo y pulsa «Activar». Solo se hace una vez. ¿No tienes código? Pídelo en la pestaña <em>Descarga y contacto</em>.</p>
           </div>
         </details>
 
         <details class="step">
           <summary>
             <span class="step__num">3</span>
-            <span class="step__title" data-i18n="step3_h">Configurar</span>
+            <span class="step__title" data-i18n="step3_h">Usar</span>
           </summary>
           <div class="step__body">
-            <div class="blur-wrap" tabindex="0" role="button" aria-label="Comando oculto — próximamente">
-              <pre class="blur-content"><code>cp confg/config.jsn.exmple confg/config.jsn
-# edita confg/config.jsn y coloca tu API key</code></pre>
-              <span class="blur-overlay" data-i18n="blur_msg">Próximamente, contáctame para recibir una versión demo</span>
-            </div>
-            <p data-i18n="step3_p">O usa el modo local sin clave (ver abajo).</p>
-          </div>
-        </details>
-
-        <details class="step">
-          <summary>
-            <span class="step__num">4</span>
-            <span class="step__title" data-i18n="step4_h">Ejecutar</span>
-          </summary>
-          <div class="step__body">
-            <div class="blur-wrap" tabindex="0" role="button" aria-label="Comando oculto — próximamente">
-              <pre class="blur-content"><code>perI bn/bot4s.pI --start</code></pre>
-              <span class="blur-overlay" data-i18n="blur_msg">Próximamente, contáctame para recibir una versión demo</span>
-            </div>
-            <p data-i18n="step4_p">Se abre la ventana. Pulsa «Escuchar» o di la palabra de activación «Botas» y habla tu comando.</p>
+            <p data-i18n="step3_p">Escribe tu petición o pulsa «Escuchar» y habla. También puedes activar el <strong>Modo Atención</strong> y decir la palabra «Botas» seguida de tu comando. El botón «Explicar» te muestra el comando de terminal equivalente.</p>
           </div>
         </details>
       </div>
 
-      <h2 class="section-title" data-i18n="apikeys_h">Obtener una API key</h2>
-      <div class="apikeys">
-        <article class="apicard">
-          <h3 data-i18n="api1_h">OpenAI (recomendado)</h3>
-          <p data-i18n="api1_p">Mayor precisión (Whisper + GPT-4o).</p>
-          <ol>
-            <li data-i18n="api1_s1">Entra a <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com/api-keys</a>.</li>
-            <li data-i18n="api1_s2">Inicia sesión y pulsa «Create new secret key».</li>
-            <li data-i18n="api1_s3">Copia la clave (empieza con <code>sk-…</code>) en <code>config.json</code> → <code>"api_key"</code>.</li>
-          </ol>
-        </article>
-        <article class="apicard">
-          <h3 data-i18n="api2_h">DeepSeek (alternativa)</h3>
-          <p data-i18n="api2_p">Compatible con la API de OpenAI, suele ser más económica.</p>
-          <ol>
-            <li data-i18n="api2_s1">Entra a <a href="https://platform.deepseek.com" target="_blank" rel="noopener">platform.deepseek.com</a>.</li>
-            <li data-i18n="api2_s2">Crea una API key en el panel.</li>
-            <li data-i18n="api2_s3">Colócala en <code>config.json</code> y selecciona el proveedor DeepSeek.</li>
-          </ol>
-        </article>
-        <article class="apicard">
-          <h3 data-i18n="api3_h">Local · sin clave</h3>
-          <p data-i18n="api3_p">100&nbsp;% privado y gratis, sin internet.</p>
-          <ol>
-            <li data-i18n="api3_s1">Instala <a href="https://lmstudio.ai" target="_blank" rel="noopener">LM&nbsp;Studio</a> u <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a>.</li>
-            <li data-i18n="api3_s2">Descarga un modelo (p.ej. DeepSeek-R1 8B).</li>
-            <li data-i18n="api3_s3">Inicia el servidor local y apunta <code>config.json</code> a esa URL.</li>
-          </ol>
-        </article>
+      <h2 class="section-title" data-i18n="code_h">Tu código de acceso</h2>
+      <div class="callout">
+        <p data-i18n="code_p">
+          La versión de demostración se conecta a la IA a través de un <strong>servidor
+          intermedio</strong>, así que <strong>no necesitas ninguna API key</strong> ni
+          configurar nada: solo tu código de acceso. Cada código incluye un número limitado de
+          peticiones para que puedas probar BOTAS. Pídelo gratis en la pestaña
+          <em>Descarga y contacto</em> y lo recibirás al instante.
+        </p>
       </div>
     </section>
 
     <!-- ════════════════ PESTAÑA 4 · DESCARGA Y CONTACTO ════════════════ -->
     <section class="panel" id="descarga" role="tabpanel" aria-label="Descarga y contacto">
-      <h1 data-i18n="download_h1">Descarga</h1>
+      <h1 data-i18n="download_h1">Descarga y acceso</h1>
 
-      <div class="countdown-box">
-        <p class="eyebrow" data-i18n="cd_eyebrow">Liberación pública del repositorio</p>
-        <div class="countdown" id="countdown" aria-live="polite">
-          <div class="cd"><span class="cd__num" data-cd="days">--</span><span class="cd__lbl" data-i18n="cd_days">días</span></div>
-          <div class="cd"><span class="cd__num" data-cd="hours">--</span><span class="cd__lbl" data-i18n="cd_hours">horas</span></div>
-          <div class="cd"><span class="cd__num" data-cd="mins">--</span><span class="cd__lbl" data-i18n="cd_mins">min</span></div>
-          <div class="cd"><span class="cd__num" data-cd="secs">--</span><span class="cd__lbl" data-i18n="cd_secs">seg</span></div>
-        </div>
-        <p class="countdown__target" data-i18n="cd_target">Disponible el <strong>25 de julio de 2026</strong>.</p>
-        <div class="blur-wrap blur-wrap--btn" tabindex="0" role="button" aria-label="Descarga próximamente">
-          <a class="btn btn--solid is-disabled blur-content" id="download-btn"
-             href="https://github.com/huesomx/B0TAS-private/releases/v0.0" target="_blank" rel="noopener"
-             aria-disabled="true" data-i18n="download_btn">Descargar (próximamente)</a>
-          <span class="blur-overlay" data-i18n="blur_msg">Próximamente, contáctame para recibir una versión demo</span>
-        </div>
-        <p class="muted small" id="download-note" data-i18n="download_note">El enlace se habilitará automáticamente cuando termine la cuenta regresiva.</p>
+      <div class="callout callout--live">
+        <p class="eyebrow" data-i18n="dl_eyebrow">Versión de demostración · disponible ahora</p>
+        <p data-i18n="dl_lead">Instala BOTAS con un solo comando en tu terminal de GNU/Linux:</p>
+        <pre class="cmd"><code>git clone https://github.com/Hudesde/BOTAS-DEMO.git
+cd BOTAS-DEMO
+sudo bash install.sh</code></pre>
+        <p class="muted small" data-i18n="dl_note">Al abrir BOTAS por primera vez te pedirá un <strong>código de acceso</strong>. Solicítalo gratis en el formulario de abajo: lo recibes al instante.</p>
       </div>
 
-      <h1 class="mt" data-i18n="contact_h1">Contacto y feedback</h1>
+      <h1 class="mt" data-i18n="contact_h1">Solicita tu código y contacto</h1>
       <p class="lead" data-i18n="contact_lead">
-        ¿Tienes comentarios, dudas o quieres una <strong>demo privada</strong>? Escríbeme: leo
-        todo lo que llega por aquí.
+        Déjame tu correo y te asigno un <strong>código de acceso</strong> para probar BOTAS.
+        ¿Dudas o comentarios? Escríbelos también: leo todo lo que llega por aquí.
       </p>
 
-      <form class="contact" id="contact-form"
-            action="https://formspree.io/f/mlgvaklw"
-            method="POST"
-            data-fs-form="mlgvaklw"
-            novalidate>
-        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <form class="contact" id="contact-form" novalidate>
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
 
         <div class="field">
           <label for="name" data-i18n="contact_name">Nombre</label>
-          <input id="name" name="name" type="text" autocomplete="name" required data-fs-field="name">
+          <input id="name" name="name" type="text" autocomplete="name" required>
         </div>
         <div class="field">
           <label for="email" data-i18n="contact_email">Correo</label>
-          <input id="email" name="email" type="email" autocomplete="email" required data-fs-field="email">
+          <input id="email" name="email" type="email" autocomplete="email" required>
         </div>
         <div class="field">
-          <label for="message" data-i18n="contact_message">Mensaje</label>
-          <textarea id="message" name="message" rows="5" required data-fs-field="message"></textarea>
+          <label for="message" data-i18n="contact_message">Mensaje <span class="muted small" data-i18n="contact_message_opt">(opcional)</span></label>
+          <textarea id="message" name="message" rows="4"></textarea>
         </div>
         <label class="check">
-          <input type="checkbox" name="demo_privada" value="Sí" data-fs-field="demo_privada">
-          <span data-i18n="contact_demo">Quiero solicitar una <strong>demo privada</strong>.</span>
+          <input type="checkbox" id="want-code" name="quiere_codigo" value="Sí" checked>
+          <span data-i18n="contact_demo">Quiero un <strong>código de acceso</strong> para probar BOTAS.</span>
         </label>
 
-        <button type="submit" class="btn btn--solid" id="submit-btn" data-fs-submit data-i18n="contact_submit">Enviar</button>
+        <button type="submit" class="btn btn--solid" id="submit-btn" data-i18n="contact_submit">Solicitar acceso</button>
 
-        <p class="form-status form-status--success" id="form-success" data-fs-success hidden role="status" aria-live="polite" data-i18n="form_success">
-          ¡Gracias! Tu mensaje fue enviado. Te responderé pronto.
+        <!-- Zona donde aparece el código asignado tras enviar -->
+        <div class="code-result" id="code-result" hidden aria-live="polite">
+          <p class="code-result__intro" data-i18n="code_intro">Este es tu código de acceso. Cópialo y pégalo en BOTAS al abrirlo:</p>
+          <p class="code-result__code" id="code-value">————</p>
+          <p class="muted small" data-i18n="code_hint">Guárdalo: es personal y tiene un número limitado de usos de demostración.</p>
+        </div>
+
+        <p class="form-status form-status--success" id="form-success" hidden role="status" aria-live="polite" data-i18n="form_success">
+          ¡Gracias! Tu mensaje fue enviado.
         </p>
-        <p class="form-status form-status--error" id="form-error" data-fs-error hidden role="alert" data-i18n="form_error">
+        <p class="form-status form-status--error" id="form-error" hidden role="alert" data-i18n="form_error">
           Hubo un problema al enviar. Inténtalo de nuevo o escríbeme directamente.
         </p>
         <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
 
         <p class="muted small">
           <span data-i18n="mailto_q">¿Prefieres tu propio correo?</span>
-          <a id="mailto-fallback" href="mailto:aatr010423@gmail.com?subject=Feedback%20BOTAS" data-i18n="mailto_link">Escríbeme directamente</a>.
+          <a id="mailto-fallback" href="mailto:aatr010423@gmail.com?subject=Acceso%20BOTAS" data-i18n="mailto_link">Escríbeme directamente</a>.
         </p>
       </form>
     </section>
@@ -379,7 +327,7 @@ cd B0TAS--private</code></pre>
   </main>
 
   <footer class="site-foot">
-    <p data-i18n="foot1">BOTAS · Universidad Tecnológica de la Mixteca · CLIHC&nbsp;2026</p>
+    <p data-i18n="foot1">BOTAS · Universidad Tecnológica de la Mixteca · AIS/IADIS&nbsp;2026</p>
     <p class="muted small" data-i18n="foot2">Hecho con HTML, CSS y JavaScript · sin rastreadores.</p>
   </footer>
 
