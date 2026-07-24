@@ -329,3 +329,85 @@ pre code{background:none;color:inherit;padding:0;font-size:.86rem;line-height:1.
   .topbar{gap:1rem}
   .lang-switch{margin-left:0}
 }
+
+/* ═══ Pestaña Investigación ═══════════════════════════════════════════════ */
+h4{font-size:.92rem;margin:0 0 .4em;line-height:1.25}
+
+/* Variantes de callout */
+.callout--warn{background:#fffaf0;border-color:#c58a00}
+.callout--warn ul{margin:0;padding-left:1.1rem}
+.callout--warn li{margin:.3rem 0;font-size:.92rem}
+
+/* Lista de descargas */
+.dl-list{list-style:none;padding:0;margin:.8rem 0 1.4rem;display:grid;gap:.4rem}
+.dl-list li{
+  display:flex;align-items:center;justify-content:space-between;gap:.8rem;
+  flex-wrap:wrap;border:1px solid var(--line);border-radius:var(--radius);
+  padding:.7rem .9rem;background:var(--paper);transition:border-color .15s ease;
+}
+.dl-list li:hover{border-color:var(--ink)}
+.dl-list a{font-weight:600;text-decoration:none}
+.dl-list a:hover{text-decoration:underline}
+
+/* Figuras */
+.fig{margin:1.2rem 0}
+.fig img{
+  display:block;width:100%;height:auto;
+  border:1px solid var(--line);border-radius:var(--radius);background:var(--paper);
+}
+.fig--sm{margin:0}
+.fig--sm figcaption{font-size:.76rem;margin-top:.3rem}
+
+/* Galería de gráficas */
+.gallery{
+  display:grid;grid-template-columns:1fr;gap:1rem;
+  margin:1.2rem 0 1.6rem;
+}
+
+/* Tarjetas a dos columnas */
+.two-col{display:grid;grid-template-columns:1fr;gap:1rem;margin:1.1rem 0}
+.mini-card{
+  border:1px solid var(--line);border-radius:var(--radius);
+  padding:.95rem 1.1rem;background:var(--paper);
+}
+.mini-card ul{margin:0;padding-left:1.05rem}
+.mini-card li{margin:.35rem 0;font-size:.9rem;color:var(--ink-2)}
+.mini-card p{margin:0;font-size:.9rem;color:var(--ink-2)}
+.mini-card--good{border-color:#2e7d32;background:#f6fbf6}
+.mini-card--warn{border-color:#c58a00;background:#fffaf0}
+
+/* Tablas de datos */
+.table-wrap{overflow-x:auto;margin:1rem 0 1.4rem;-webkit-overflow-scrolling:touch}
+table.data{border-collapse:collapse;width:100%;min-width:420px;font-size:.9rem}
+table.data th,table.data td{
+  text-align:left;padding:.55rem .7rem;border-bottom:1px solid var(--line);
+}
+table.data thead th{
+  font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--muted);border-bottom:1.5px solid var(--ink);white-space:nowrap;
+}
+table.data td:not(:first-child),table.data th:not(:first-child){
+  text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+table.data tbody tr:hover{background:var(--soft)}
+table.data tr.total td{font-weight:700;border-top:1.5px solid var(--ink);border-bottom:0}
+table.data .good{color:#2e7d32;font-weight:700}
+table.data .warn{color:#c58a00;font-weight:700}
+
+/* Lista simple */
+ul.plain{margin:.6rem 0 1.4rem;padding-left:1.1rem}
+ul.plain li{margin:.35rem 0;color:var(--ink-2)}
+
+@media (min-width:620px){
+  .two-col{grid-template-columns:1fr 1fr;gap:1.2rem}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+}
+@media (min-width:860px){
+  .gallery{grid-template-columns:repeat(3,1fr)}
+}
+
+/* Video de sesión dentro de una figura */
+.fig video{
+  display:block;width:100%;height:auto;
+  border:1px solid var(--line);border-radius:var(--radius);background:#000;
+}

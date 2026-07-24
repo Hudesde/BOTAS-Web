@@ -25,6 +25,7 @@
       <button class="tab is-active" role="tab" data-tab="que-es" aria-selected="true" data-i18n="nav_what">¿Qué es?</button>
       <button class="tab" role="tab" data-tab="proyecto" aria-selected="false" data-i18n="nav_about">Sobre mí</button>
       <button class="tab" role="tab" data-tab="empezar" aria-selected="false" data-i18n="nav_start">Cómo empezar</button>
+      <button class="tab" role="tab" data-tab="investigacion" aria-selected="false" data-i18n="nav_research">Investigación</button>
       <button class="tab" role="tab" data-tab="descarga" aria-selected="false" data-i18n="nav_download">Descarga y contacto</button>
     </nav>
 
@@ -267,7 +268,388 @@ sudo bash install.sh</code></pre>
       </div>
     </section>
 
-    <!-- ════════════════ PESTAÑA 4 · DESCARGA Y CONTACTO ════════════════ -->
+    <!-- ════════════════ PESTAÑA 4 · INVESTIGACIÓN ════════════════ -->
+    <section class="panel" id="investigacion" role="tabpanel" aria-label="Investigación">
+      <h1 data-i18n="rs_h1">Investigación y evidencia</h1>
+
+      <div class="callout callout--live">
+        <p class="eyebrow" data-i18n="rs_eyebrow">Transparencia completa</p>
+        <p data-i18n="rs_lead">
+          Una charla de 20 minutos obliga a recortar. <strong>Aquí está todo lo que no cupo</strong>:
+          los diagramas completos, la metodología, las gráficas, las limitaciones honestas
+          y los <strong>datos crudos descargables</strong> — incluidos los números que no nos favorecen.
+        </p>
+      </div>
+
+      <!-- ───── Descargas de evidencia ───── -->
+      <h2 class="section-title" data-i18n="rs_data_h">Datos crudos y reportes</h2>
+      <p class="lead" data-i18n="rs_data_p">
+        Todo lo que sostiene las cifras de abajo, tal cual salió de las herramientas.
+        Sin filtrar ni maquillar.
+      </p>
+      <ul class="dl-list">
+        <li>
+          <a href="assets/docs/reporte_usabilidad.pdf" download>📄 <span data-i18n="rs_dl1">Reporte completo de usabilidad (<em>n</em>=14, ISO 9241-11)</span></a>
+          <span class="muted small">PDF · 811 KB</span>
+        </li>
+        <li>
+          <a href="assets/docs/lima_250_tasks_dataset.csv" download>📊 <span data-i18n="rs_dl2">Dataset de evaluación — 250 tareas</span></a>
+          <span class="muted small">CSV · 21 KB</span>
+        </li>
+        <li>
+          <a href="assets/docs/resultados_deepseek_250.csv" download>📈 <span data-i18n="rs_dl3">Resultados crudos — DeepSeek (250 tareas)</span></a>
+          <span class="muted small">CSV · 26 KB</span>
+        </li>
+        <li>
+          <a href="assets/docs/resultados_openai_250.csv" download>📈 <span data-i18n="rs_dl4">Resultados crudos — GPT-4o (250 tareas)</span></a>
+          <span class="muted small">CSV · 25 KB</span>
+        </li>
+      </ul>
+
+      <!-- ───── Arquitectura completa ───── -->
+      <h2 class="section-title" data-i18n="rs_arch_h">Arquitectura completa</h2>
+      <p class="lead" data-i18n="rs_arch_p">
+        Ocho componentes modulares en Perl. Una petición hablada atraviesa cuatro capas:
+        detector local, TaskLearner, parser LLM y validador de seguridad antes de ejecutarse.
+      </p>
+
+      <figure class="fig">
+        <img src="assets/research/architecture_botas_en.png" alt="Diagrama de la arquitectura de BOTAS" loading="lazy">
+        <figcaption data-i18n="rs_fig_arch">Arquitectura general: el detector local intercepta ~30 % de las peticiones; el resto baja por el LLM, el validador y la ejecución.</figcaption>
+      </figure>
+
+      <figure class="fig">
+        <img src="assets/research/command_flow_en.png" alt="Flujo de procesamiento de un comando" loading="lazy">
+        <figcaption data-i18n="rs_fig_flow">Flujo de un comando de principio a fin: voz → Vosk/Whisper → parser → validación de seguridad → ejecución → respuesta hablada.</figcaption>
+      </figure>
+
+      <figure class="fig">
+        <img src="assets/research/attention_mode_flow_en.png" alt="Flujo del modo atención" loading="lazy">
+        <figcaption data-i18n="rs_fig_attn">Modo Atención: la palabra «botas» se detecta <strong>offline</strong>. La nube solo se contacta <em>después</em> de activar, durante una ventana de 30 s.</figcaption>
+      </figure>
+
+      <h3 data-i18n="rs_tl_h">TaskLearner: aprender sin dejar de ser seguro</h3>
+      <div class="two-col">
+        <div class="mini-card">
+          <h4 data-i18n="rs_tl1_h">Cómo aprende</h4>
+          <ul>
+            <li data-i18n="rs_tl1_a">Tras una llamada exitosa al LLM, deduce una <strong>plantilla reutilizable</strong> de la petición.</li>
+            <li data-i18n="rs_tl1_b">Localiza qué palabras corresponden a qué parámetro (un nombre de carpeta, un término de búsqueda), ponderando con <strong>TF-IDF</strong>.</li>
+            <li data-i18n="rs_tl1_c">Al llegar una petición parecida, calcula <strong>similitud coseno</strong>; por encima de <strong>0.60</strong> reconstruye la misma acción JSON — <strong>cero llamadas al LLM</strong>.</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <h4 data-i18n="rs_tl2_h">Salvaguardas y control</h4>
+          <ul>
+            <li data-i18n="rs_tl2_a">Un patrón que <strong>falla dos veces</strong> queda en cuarentena: la petición vuelve al LLM.</li>
+            <li data-i18n="rs_tl2_b">Los casi duplicados (&gt;95 % de similitud) solo incrementan un contador; techo de 500 patrones con desalojo del menos usado.</li>
+            <li data-i18n="rs_tl2_c">Solo aprende acciones seguras y plantillables — nunca <code>clarify</code> ni <code>answer</code>.</li>
+            <li data-i18n="rs_tl2_d"><strong>Desactivado por defecto.</strong> Puedes pausarlo o borrar permanentemente lo aprendido.</li>
+            <li data-i18n="rs_tl2_e">El validador de seguridad corre <strong>igual</strong> en cada comando reconstruido.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 data-i18n="rs_edu_h">Salida educativa</h3>
+      <p data-i18n="rs_edu_p">
+        Cada comando ejecutado vuelve con un resumen en lenguaje llano y, en operaciones
+        marcadas, una evaluación del riesgo — para construir competencia, no dependencia.
+        Todas las interacciones quedan registradas localmente para auditoría.
+      </p>
+      <figure class="fig">
+        <img src="assets/research/Resultado.png" alt="Salida de una búsqueda en BOTAS" loading="lazy">
+        <figcaption data-i18n="rs_fig_out">Resultado de una búsqueda: cada archivo con su ruta y tamaño, el conteo total y el registro de actividad.</figcaption>
+      </figure>
+
+      <!-- ───── Evaluación 250 tareas ───── -->
+      <h2 class="section-title" data-i18n="rs_eval_h">Evaluación automatizada · 250 tareas</h2>
+      <p class="lead" data-i18n="rs_eval_p">
+        Los revisores preguntaron si el 89 % del artículo venía de verificación manual o
+        automatizada. Construimos un <strong>arnés reproducible en Perl</strong> que pasa el
+        dataset completo por el parser real. <strong>Es automatizado, y cualquiera puede repetirlo.</strong>
+      </p>
+
+      <div class="table-wrap">
+        <table class="data">
+          <thead>
+            <tr>
+              <th data-i18n="rs_th_cat">Categoría (en alcance)</th>
+              <th><em>n</em></th>
+              <th data-i18n="rs_th_match">Concordancia de acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td data-i18n="rs_c_web">Búsqueda web</td><td>20</td><td class="good">100 %</td></tr>
+            <tr><td data-i18n="rs_c_app">Apertura de aplicaciones</td><td>10</td><td class="good">100 %</td></tr>
+            <tr><td data-i18n="rs_c_proc">Control de procesos</td><td>5</td><td class="good">100 %</td></tr>
+            <tr><td data-i18n="rs_c_sys">Información del sistema</td><td>17</td><td>94.1 %</td></tr>
+            <tr><td data-i18n="rs_c_net">Redes</td><td>13</td><td>92.3 %</td></tr>
+            <tr><td data-i18n="rs_c_perm">Permisos</td><td>4</td><td>75.0 %</td></tr>
+            <tr><td data-i18n="rs_c_file">Gestión de archivos</td><td>38</td><td class="warn">63.2 %</td></tr>
+            <tr><td data-i18n="rs_c_proj">Creación de proyectos</td><td>20</td><td class="warn">45.0 %</td></tr>
+            <tr class="total"><td data-i18n="rs_c_total">Total</td><td>127</td><td>78.0 %</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="two-col">
+        <div class="mini-card mini-card--good">
+          <h4 data-i18n="rs_safe_h">La seguridad aguantó</h4>
+          <ul>
+            <li data-i18n="rs_safe_a">28 operaciones que modifican el estado se materializaron.</li>
+            <li data-i18n="rs_safe_b"><strong>5/5</strong> operaciones destructivas (<code>delete</code>) pidieron confirmación.</li>
+            <li data-i18n="rs_safe_c"><strong>0 falsos negativos</strong> de seguridad.</li>
+            <li data-i18n="rs_safe_d">Peligros fuera de alcance (<code>reboot</code>, <code>pkill</code>) nunca se materializaron.</li>
+          </ul>
+        </div>
+        <div class="mini-card mini-card--warn">
+          <h4 data-i18n="rs_weak_h">Nuestro punto más débil</h4>
+          <p data-i18n="rs_weak_p">
+            <strong>Creación de proyectos: 45 %.</strong> El modelo alterna entre emitir una acción
+            <code>create_project</code> de alto nivel o improvisar carpetas una por una. Es el mismo
+            problema que hizo fallar la tarea T1 del estudio de usabilidad, y por eso el
+            <strong>planificador de tareas</strong> es nuestra prioridad de trabajo futuro.
+          </p>
+        </div>
+      </div>
+
+      <h3 data-i18n="rs_cmp_h">GPT-4o frente a DeepSeek: autonomía contra cautela</h3>
+      <p data-i18n="rs_cmp_p">
+        Las mismas 250 tareas, el mismo prompt, dos modelos. La diferencia no es calidad, es
+        <strong>temperamento</strong>.
+      </p>
+      <div class="table-wrap">
+        <table class="data">
+          <thead>
+            <tr>
+              <th data-i18n="rs_th_metric">Métrica (en alcance)</th>
+              <th>DeepSeek</th>
+              <th>GPT-4o</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td data-i18n="rs_m_match">Concordancia de acción</td><td class="good">78.0 %</td><td>56.7 %</td></tr>
+            <tr><td data-i18n="rs_m_clar">Recurre a <code>clarify</code></td><td>11.0 %</td><td>36.2 %</td></tr>
+            <tr><td data-i18n="rs_m_file">Gestión de archivos</td><td>63.2 %</td><td>18.4 %</td></tr>
+            <tr><td data-i18n="rs_m_perm">Permisos</td><td>75.0 %</td><td>0 %</td></tr>
+            <tr><td data-i18n="rs_m_web">Búsqueda web / apps</td><td class="good">100 %</td><td class="good">100 %</td></tr>
+            <tr><td data-i18n="rs_m_safe">Falsos negativos de seguridad</td><td class="good">0</td><td class="good">0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout">
+        <p data-i18n="rs_cmp_key">
+          Los modelos coinciden en la acción en el <strong>64.8 %</strong> (162/250) de las tareas.
+          GPT-4o es <strong>sistemáticamente más cauteloso</strong>: cuando una ruta es implícita,
+          pide aclaración en vez de asumir. Por eso la elección de modelo no es un número de
+          precisión, sino una <strong>palanca de diseño</strong>: autonomía (DeepSeek) frente a
+          cautela (GPT-4o). Se elige <em>para tus usuarios</em>.
+        </p>
+      </div>
+
+      <!-- ───── Usabilidad ───── -->
+      <h2 class="section-title" data-i18n="rs_us_h">Estudio de usabilidad · <em>n</em>=14</h2>
+      <p class="lead" data-i18n="rs_us_p">
+        El estudio piloto del artículo tenía solo 3 participantes, y los revisores lo señalaron.
+        Lo repetimos en serio: <strong>14 participantes novatos</strong> en el laboratorio de
+        usabilidad de la UTM (USALAB), bajo consentimiento informado y métricas
+        <strong>ISO 9241-11</strong>.
+      </p>
+
+      <div class="two-col">
+        <div class="mini-card">
+          <h4 data-i18n="rs_us_d_h">Diseño</h4>
+          <ul>
+            <li data-i18n="rs_us_d_a"><strong>Intra-sujeto</strong> para la modalidad: cada persona hizo las 3 tareas primero con la interfaz gráfica y luego por voz.</li>
+            <li data-i18n="rs_us_d_b"><strong>Entre-sujetos</strong> para el modelo: 7 con DeepSeek, 7 con GPT-4o.</li>
+            <li data-i18n="rs_us_d_c">El facilitador dice <em>qué</em> lograr, nunca <em>cómo</em>.</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <h4 data-i18n="rs_us_t_h">Tareas</h4>
+          <ul>
+            <li data-i18n="rs_us_t_a"><strong>T1</strong> — Crear un árbol de carpetas (6 materias).</li>
+            <li data-i18n="rs_us_t_b"><strong>T2</strong> — Encontrar un PDF y moverlo.</li>
+            <li data-i18n="rs_us_t_c"><strong>T3</strong> — Hacer una búsqueda web.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 data-i18n="rs_vid_h">Una sesión real</h3>
+      <p data-i18n="rs_vid_p">
+        Un fragmento de una sesión del estudio, tal como ocurrió. En el registro de actividad
+        se ve el <strong>pipeline completo en texto</strong>: grabación, transcripción, comando
+        generado, evaluación de riesgo y ejecución.
+      </p>
+      <figure class="fig">
+        <video controls preload="none" playsinline
+               poster="assets/research/sesion_usabilidad_poster.jpg"
+               src="assets/research/sesion_usabilidad_anonimizada.mp4">
+          <span data-i18n="video_unsupported">Tu navegador no soporta el reproductor de video.</span>
+        </video>
+        <figcaption data-i18n="rs_vid_cap">
+          Fragmento <strong>anonimizado</strong>: la cámara del participante está cubierta y el
+          audio eliminado, conforme al consentimiento informado que firmaron. Las sesiones
+          completas no se publican. <em>(La aplicación aparece con su nombre de desarrollo, LIMA.)</em>
+        </figcaption>
+      </figure>
+
+      <h3 data-i18n="rs_eff_h">Efectividad</h3>
+      <p data-i18n="rs_eff_p">
+        Con la interfaz gráfica todos completaron todo: <strong>100 %</strong> — esperable, todos
+        saben usar una GUI. Por voz, en un <strong>primer contacto sin entrenamiento</strong>,
+        BOTAS alcanzó un <strong>83.9 % promedio</strong> (T1 80.8 % · T2 78.6 % · T3 92.3 %),
+        <strong>mejorando tarea tras tarea</strong>. Los fallos se concentraron donde cabía
+        esperar: dictar seis nombres de carpeta de un tirón, o señalar un archivo concreto.
+      </p>
+      <figure class="fig">
+        <img src="assets/research/G4_completitud_por_tarea.png" alt="Completitud por tarea y modalidad" loading="lazy">
+        <figcaption data-i18n="rs_fig_g4">Completitud por tarea y modalidad. La brecha es real en T1 y se cierra hacia T3: la mejora con la familiaridad es la señal alentadora bajo los números.</figcaption>
+      </figure>
+
+      <h3 data-i18n="rs_effi_h">Eficiencia</h3>
+      <p data-i18n="rs_effi_p">
+        Aquí está el dato incómodo: la voz fue <strong>2.1–2.5× más lenta</strong> que la GUI en el
+        primer contacto — latencia de procesamiento más la curva de aprendizaje de cómo formular
+        una petición. La varianza fue alta: algunos usuarios lo lograron con una instrucción
+        limpia, otros reformularon varias veces. Aun así, la velocidad <em>percibida</em> se quedó
+        en un moderado <strong>3.6/5</strong>: no siempre vivieron esos segundos extra como un problema.
+      </p>
+      <figure class="fig">
+        <img src="assets/research/G3_tiempos_por_tarea.png" alt="Tiempos por tarea y modalidad" loading="lazy">
+        <figcaption data-i18n="rs_fig_g3">Tiempos por tarea, modalidad y condición. Las barras de error altas son la variabilidad individual — y son un objetivo de diseño: bajar latencia y ayudar a formular mejor.</figcaption>
+      </figure>
+      <div class="gallery">
+        <figure class="fig fig--sm"><img src="assets/research/tiempos_T1.png" alt="Tiempos T1" loading="lazy"><figcaption>T1</figcaption></figure>
+        <figure class="fig fig--sm"><img src="assets/research/tiempos_T2.png" alt="Tiempos T2" loading="lazy"><figcaption>T2</figcaption></figure>
+        <figure class="fig fig--sm"><img src="assets/research/tiempos_T3.png" alt="Tiempos T3" loading="lazy"><figcaption>T3</figcaption></figure>
+      </div>
+
+      <h3 data-i18n="rs_sat_h">Satisfacción</h3>
+      <p data-i18n="rs_sat_p">
+        Y pese a ser más lento y no ser perfecto, la satisfacción fue alta: <strong>8.21/10</strong>
+        general, con <strong>facilidad de aprendizaje 4.54/5</strong> (lo mejor valorado) y
+        <strong>naturalidad 3.46/5</strong> (lo más débil). El <strong>85 % volvería a usar BOTAS</strong>.
+        En la tarea repetitiva T1 la mayoría <em>prefirió la voz</em> aunque fuera más lenta: se
+        valora la automatización desde el primer día. Ese perfil — alta capacidad de aprendizaje,
+        naturalidad rezagada — es lo que la literatura reporta para <em>todos</em> los asistentes
+        de voz, Alexa y Siri incluidos. Es el problema abierto del campo, no solo nuestro.
+      </p>
+      <div class="gallery">
+        <figure class="fig fig--sm"><img src="assets/research/G1_calificacion_por_usuario.png" alt="Calificación por usuario" loading="lazy"><figcaption data-i18n="rs_g1">Calificación por participante</figcaption></figure>
+        <figure class="fig fig--sm"><img src="assets/research/G2_promedios_por_condicion.png" alt="Promedios por condición" loading="lazy"><figcaption data-i18n="rs_g2">Promedios por condición</figcaption></figure>
+        <figure class="fig fig--sm"><img src="assets/research/G5_preferencia_interfaz.png" alt="Preferencia de interfaz" loading="lazy"><figcaption data-i18n="rs_g5">Preferencia de interfaz</figcaption></figure>
+        <figure class="fig fig--sm"><img src="assets/research/G6_frustracion_por_tarea.png" alt="Frustración por tarea" loading="lazy"><figcaption data-i18n="rs_g6">Frustración por tarea</figcaption></figure>
+        <figure class="fig fig--sm"><img src="assets/research/G7_satisfaccion_por_tarea.png" alt="Satisfacción por tarea" loading="lazy"><figcaption data-i18n="rs_g7">Satisfacción por tarea</figcaption></figure>
+        <figure class="fig fig--sm"><img src="assets/research/G8_radar_por_condicion.png" alt="Radar por condición" loading="lazy"><figcaption data-i18n="rs_g8">Perfil UX por modelo</figcaption></figure>
+        <figure class="fig fig--sm"><img src="assets/research/G9_velocidad_percibida.png" alt="Velocidad percibida" loading="lazy"><figcaption data-i18n="rs_g9">Velocidad percibida</figcaption></figure>
+        <figure class="fig fig--sm"><img src="assets/research/final_calificacion.png" alt="Calificación final" loading="lazy"><figcaption data-i18n="rs_gf1">Calificación final</figcaption></figure>
+        <figure class="fig fig--sm"><img src="assets/research/final_facilidad.png" alt="Facilidad" loading="lazy"><figcaption data-i18n="rs_gf2">Facilidad de aprendizaje</figcaption></figure>
+        <figure class="fig fig--sm"><img src="assets/research/final_naturalidad.png" alt="Naturalidad" loading="lazy"><figcaption data-i18n="rs_gf3">Naturalidad</figcaption></figure>
+        <figure class="fig fig--sm"><img src="assets/research/final_accesibilidad.png" alt="Accesibilidad" loading="lazy"><figcaption data-i18n="rs_gf4">Accesibilidad</figcaption></figure>
+        <figure class="fig fig--sm"><img src="assets/research/final_satisfaccion.png" alt="Satisfacción final" loading="lazy"><figcaption data-i18n="rs_gf5">Satisfacción final</figcaption></figure>
+      </div>
+
+      <!-- ───── Multi-distro ───── -->
+      <h2 class="section-title" data-i18n="rs_distro_h">Validación multi-distribución</h2>
+      <p class="lead" data-i18n="rs_distro_p">
+        El artículo declaraba una limitación: aunque BOTAS <em>mapea</em> comandos a seis familias,
+        las pruebas sistemáticas solo se habían hecho en Ubuntu. Corrimos el
+        <strong>mismo instalador universal, sin modificar</strong>, en máquinas virtuales limpias
+        de tres familias más.
+      </p>
+      <div class="table-wrap">
+        <table class="data">
+          <thead>
+            <tr>
+              <th data-i18n="rs_th_family">Familia</th>
+              <th data-i18n="rs_th_distro">Distribución</th>
+              <th data-i18n="rs_th_install">Instalación</th>
+              <th data-i18n="rs_th_app">Aplicación</th>
+              <th data-i18n="rs_th_wake">Palabra clave</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>debian</td><td>Ubuntu 22.04 <span class="muted small">(base)</span></td><td class="good">✓</td><td class="good">✓</td><td class="good">✓</td></tr>
+            <tr><td>debian</td><td>Kali (rolling)</td><td class="good">✓</td><td class="good">✓</td><td class="warn">red *</td></tr>
+            <tr><td>fedora</td><td>Fedora 44</td><td class="good">✓</td><td class="good">✓</td><td class="good">✓</td></tr>
+            <tr><td>arch</td><td>EndeavourOS / Manjaro</td><td class="good">✓</td><td class="good">✓</td><td class="good">✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted small" data-i18n="rs_distro_note">
+        * En Kali la aplicación quedó plenamente funcional; solo la descarga del modelo offline
+        fue bloqueada por la red de pruebas. En <strong>Fedora 44</strong> el instalador corrió
+        <strong>totalmente desatendido</strong> — traducción de gestor de paquetes, dependencias de
+        Perl y la palabra de activación — con <strong>cero pasos manuales</strong>. Esto convierte
+        «soporta 6 familias» de una <em>afirmación de diseño</em> en un
+        <strong>resultado verificado empíricamente</strong>.
+      </p>
+
+      <!-- ───── Limitaciones ───── -->
+      <h2 class="section-title" data-i18n="rs_lim_h">Limitaciones honestas</h2>
+      <div class="callout callout--warn">
+        <ul>
+          <li data-i18n="rs_lim_a">La voz es <strong>más lenta y menos robusta</strong> en el primer contacto que una interfaz gráfica.</li>
+          <li data-i18n="rs_lim_b">El orden fijo de modalidad (GUI primero, luego voz) puede introducir un <strong>efecto de arrastre</strong>.</li>
+          <li data-i18n="rs_lim_c">La muestra de 14 participantes es <strong>heterogénea y descriptiva</strong>, no tiene potencia estadística inferencial.</li>
+          <li data-i18n="rs_lim_d">La validación multi-distro cubre 4 familias; falta una <strong>batería completa de tareas por familia</strong>.</li>
+          <li data-i18n="rs_lim_e">La <strong>naturalidad</strong> (3.46/5) sigue siendo la dimensión más débil.</li>
+          <li data-i18n="rs_lim_f">La <strong>creación de proyectos</strong> (45 %) es la categoría más débil de la evaluación automatizada.</li>
+        </ul>
+      </div>
+
+      <!-- ───── Trabajo futuro ───── -->
+      <h2 class="section-title" data-i18n="rs_fw_h">Trabajo futuro</h2>
+      <div class="two-col">
+        <div class="mini-card">
+          <h4 data-i18n="rs_fw1_h">Planificador de tareas</h4>
+          <p data-i18n="rs_fw1_p">
+            Nuestra propia evaluación señala el problema: pedimos al modelo que resuelva una
+            petición de varias partes en <em>una sola</em> acción JSON. La solución es
+            arquitectónica — <strong>planificar primero, ejecutar paso a paso</strong>. El plan se
+            <strong>muestra antes de ejecutar nada</strong>, cada paso pasa por el
+            <strong>mismo validador determinista</strong>, y si un paso falla BOTAS pregunta y
+            replanifica en lugar de morir a medias dejando un desastre.
+          </p>
+        </div>
+        <div class="mini-card">
+          <h4 data-i18n="rs_fw2_h">Conversación continua</h4>
+          <p data-i18n="rs_fw2_p">
+            Hoy cada petición es <em>de un solo turno</em>: palabra clave → un comando → reposo.
+            El estudio mostró el costo: quien necesitaba reformular tenía que decir «botas» otra
+            vez. Lo siguiente es un diálogo que <strong>sigue abierto hasta que el usuario lo
+            cierre</strong>. El punto de diseño clave: la <strong>salida siempre es explícita</strong>
+            — una despedida hablada o un seguimiento rechazado. El asistente nunca decide por su
+            cuenta seguir escuchando.
+          </p>
+        </div>
+      </div>
+      <figure class="fig">
+        <img src="assets/research/task_planner_en.png" alt="Diagrama del planificador de tareas" loading="lazy">
+        <figcaption data-i18n="rs_fig_planner">Planificador: una petición compuesta se descompone en una cola ordenada, el <strong>plan se muestra y el usuario lo aprueba</strong>, cada paso se ejecuta por turno y, si uno falla, BOTAS pregunta y replanifica en lugar de morir a medias.</figcaption>
+      </figure>
+
+      <figure class="fig">
+        <img src="assets/research/conversation_loop_en.png" alt="Diagrama del bucle de conversación continua" loading="lazy">
+        <figcaption data-i18n="rs_fig_loop">Conversación continua: tras actuar, BOTAS pregunta «¿algo más?» y vuelve a escuchar <strong>sin necesidad de repetir la palabra clave</strong>. La salida es siempre explícita — un «botas, desestima» o un seguimiento rechazado.</figcaption>
+      </figure>
+
+      <ul class="plain">
+        <li data-i18n="rs_fw3">Modelo local totalmente <strong>sin conexión</strong> (DeepSeek-R1 destilado).</li>
+        <li data-i18n="rs_fw4">Estudio de usabilidad <strong>contrabalanceado</strong> para eliminar el efecto de arrastre.</li>
+        <li data-i18n="rs_fw5">Tutorial de <strong>incorporación</strong> que enseñe a formular peticiones.</li>
+      </ul>
+
+      <div class="callout callout--live">
+        <p data-i18n="rs_foot">
+          ¿Falta algo o quieres discutir la metodología? Escríbeme desde la pestaña
+          <em>Descarga y contacto</em> — leo todo lo que llega.
+        </p>
+      </div>
+    </section>
+
+    <!-- ════════════════ PESTAÑA 5 · DESCARGA Y CONTACTO ════════════════ -->
     <section class="panel" id="descarga" role="tabpanel" aria-label="Descarga y contacto">
       <h1 data-i18n="download_h1">Descarga y acceso</h1>
 
