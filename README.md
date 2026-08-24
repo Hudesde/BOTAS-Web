@@ -1,11 +1,11 @@
-# Sitio web de BOTAS (GitHub Pages)
+# Sitio web de LIMA (GitHub Pages)
 
-Sitio estático (HTML + CSS + JavaScript, sin framework ni build) para difundir BOTAS,
+Sitio estático (HTML + CSS + JavaScript, sin framework ni build) para difundir LIMA,
 publicar la evidencia de investigación y recibir feedback. Publicado en
-**https://hudesde.github.io/BOTAS-Web/**.
+**https://hudesde.github.io/LIMA-Web/**.
 
 ```
-BOTAS-Web/
+LIMA-Web/
 ├── index.html      # 5 pestañas (ver abajo)
 ├── styles.css      # estética minimalista blanco y negro, responsive
 ├── main.js         # i18n ES/EN/PT + pestañas + cuenta regresiva + formulario

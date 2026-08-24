@@ -1,5 +1,5 @@
 /* ===========================================================================
-   BOTAS — sitio estático · lógica de cliente
+   LIMA — sitio estático · lógica de cliente
    - Multi-idioma (ES / EN / PT) con diccionario JSON
    - Conmutación de pestañas (con soporte de #hash)
    - Menú móvil
@@ -15,8 +15,8 @@
   var CONTACT_EMAIL     = "aatr010423@gmail.com";
   var WEB3FORMS_KEY     = "536b060c-0df6-42cf-b365-0dd82c584ffb"; // access_key de Web3Forms
   var WEB3FORMS_URL     = "https://api.web3forms.com/submit";
-  var REQUEST_CODE_URL  = "https://botas-proxy.hudesde.workers.dev/request-code"; // asigna un código de acceso
-  var STORAGE_LANG      = "botas:lang";
+  var REQUEST_CODE_URL  = "https://botas-proxy.hudesde.workers.dev/request-code"; // asigna un código de acceso (host aún con el nombre antiguo: renombrar el worker a lima-proxy y redesplegar)
+  var STORAGE_LANG      = "lima:lang";
   /* ----------------------------------------------------------------------- */
 
   var $  = function (s, c) { return (c || document).querySelector(s); };
@@ -25,8 +25,8 @@
   /* ===== Diccionario i18n =============================================== */
   var I18N = {
     es: {
-      page_title: "BOTAS — Asistente de voz para GNU/Linux",
-      meta_desc: "BOTAS: un asistente de voz que actúa como middleware entre el usuario y la línea de comandos de GNU/Linux. Diseñado con principios de IA Centrada en el Humano (HCAI).",
+      page_title: "LIMA — Asistente de voz para GNU/Linux",
+      meta_desc: "LIMA: un asistente de voz que actúa como middleware entre el usuario y la línea de comandos de GNU/Linux. Diseñado con principios de IA Centrada en el Humano (HCAI).",
 
       nav_what: "¿Qué es?",
       nav_about: "Sobre mí",
@@ -35,14 +35,14 @@
 
       hero_eyebrow: "Asistente de voz · GNU/Linux · enfoque HCAI",
       hero_h1: "Habla con tu sistema operativo.",
-      hero_lead: "<strong>BOTAS</strong> (Bot de Operaciones y Tareas Automatizadas del Sistema) es un asistente de voz que actúa como <em>middleware</em> entre tú y la línea de comandos de GNU/Linux: tú dices lo que quieres hacer y BOTAS genera el comando, lo muestra, lo explica y lo ejecuta.",
+      hero_lead: "<strong>LIMA</strong> (Linux Intelligent Middleware Assistant) es un asistente de voz que actúa como <em>middleware</em> entre tú y la línea de comandos de GNU/Linux: tú dices lo que quieres hacer y LIMA genera el comando, lo muestra, lo explica y lo ejecuta.",
       hero_cta_try: "Quiero probarlo",
       hero_cta_how: "Cómo funciona",
-      hero_img_alt: "Interfaz gráfica de BOTAS mostrando el saludo, el indicador de estado y los botones de control.",
-      hero_caption: "Interfaz de BOTAS (GTK).",
+      hero_img_alt: "Interfaz gráfica de LIMA mostrando el saludo, el indicador de estado y los botones de control.",
+      hero_caption: "Interfaz de LIMA (GTK).",
 
       band1_h: "¿Para qué se hizo?",
-      band1_p: "GNU/Linux mueve la nube, las supercomputadoras y los móviles del mundo, pero su puerta de entrada sigue siendo una línea de comandos de los años 70. BOTAS nace para cerrar esa brecha: hacer accesible ese poder sin pedirle al usuario que memorice sintaxis crípticas.",
+      band1_p: "GNU/Linux mueve la nube, las supercomputadoras y los móviles del mundo, pero su puerta de entrada sigue siendo una línea de comandos de los años 70. LIMA nace para cerrar esa brecha: hacer accesible ese poder sin pedirle al usuario que memorice sintaxis crípticas.",
       band2_h: "¿Cómo es útil?",
       band2_p: "Para quien empieza en Linux, encontrar el comando correcto deja de ser un obstáculo. Para quien ya lo conoce, evita decenas de clics y permite delegar tareas por voz mientras hace otra cosa. No reemplaza la terminal: la vuelve conversacional.",
 
@@ -56,18 +56,18 @@
       f7_h: "Confirma lo riesgoso", f7_p: "Muestra el comando antes de ejecutarlo y pide confirmación en operaciones delicadas.",
       f8_h: "Respuesta hablada", f8_p: "Retroalimentación por voz con OpenAI TTS o eSpeak (offline).",
 
-      callout: "BOTAS se diseñó bajo el paradigma de <strong>Inteligencia Artificial Centrada en el Humano (HCAI)</strong>: la IA <em>propone</em> y el humano <em>decide</em>. Transparencia, control humano, seguridad y empoderamiento guían cada decisión.",
+      callout: "LIMA se diseñó bajo el paradigma de <strong>Inteligencia Artificial Centrada en el Humano (HCAI)</strong>: la IA <em>propone</em> y el humano <em>decide</em>. Transparencia, control humano, seguridad y empoderamiento guían cada decisión.",
 
       about_h1: "Sobre mí",
       about_q1: "¿Quién soy?",
       about_a1: "Hola, soy <strong>José Ramón Aragón Toledo</strong>, estudiante de Ingeniería en Computación en la <strong>Universidad Tecnológica de la Mixteca</strong> (Huajuapan de León, Oaxaca). Me gusta cacharrear con GNU/Linux, leer sobre interacción humano-computadora y construir herramientas pequeñas que terminen siendo útiles para alguien más, no sólo para mí.",
       about_portfolio: "Si quieres ver otros proyectos en los que he trabajado, puedes visitar mi <a href=\"https://hudesde.github.io/Portfolio/\" target=\"_blank\" rel=\"noopener\">portafolio</a>.",
-      about_q2: "¿Por qué desarrollé BOTAS?",
-      about_a2: "BOTAS nació durante mi <strong>servicio social</strong> en la UTM, cuando empecé a documentar cómo se construyen aplicaciones con IA generativa. Me di cuenta de algo simple: la terminal de Linux es enormemente poderosa, pero también enormemente intimidante para quien apenas llega. Quise probar si un asistente de voz, guiado por los principios de <em>IA Centrada en el Humano</em> (HCAI), podía hacer ese poder accesible sin esconder lo que pasa por debajo. De ahí salió un primer prototipo en Perl, que poco a poco fue creciendo hasta convertirse en lo que hoy es BOTAS, y que ahora forma parte de mi trabajo de tesis.",
+      about_q2: "¿Por qué desarrollé LIMA?",
+      about_a2: "LIMA nació durante mi <strong>servicio social</strong> en la UTM, cuando empecé a documentar cómo se construyen aplicaciones con IA generativa. Me di cuenta de algo simple: la terminal de Linux es enormemente poderosa, pero también enormemente intimidante para quien apenas llega. Quise probar si un asistente de voz, guiado por los principios de <em>IA Centrada en el Humano</em> (HCAI), podía hacer ese poder accesible sin esconder lo que pasa por debajo. De ahí salió un primer prototipo en Perl, que poco a poco fue creciendo hasta convertirse en lo que hoy es LIMA, y que ahora forma parte de mi trabajo de tesis.",
       about_q3: "Contexto académico",
-      about_a3: "BOTAS se desarrolla en la <strong>Universidad Tecnológica de la Mixteca</strong> bajo la dirección del <strong>M.C. Ricardo Ruiz Rodríguez</strong>, y se presenta en la conferencia <strong>AIS&nbsp;2026</strong>, parte del congreso <strong>MCCSIS</strong> de <strong>IADIS</strong> (International Association for Development of the Information Society), celebrado en Valencia, España.",
+      about_a3: "LIMA se desarrolla en la <strong>Universidad Tecnológica de la Mixteca</strong> bajo la dirección del <strong>M.C. Ricardo Ruiz Rodríguez</strong>, y se presenta en la conferencia <strong>AIS&nbsp;2026</strong>, parte del congreso <strong>MCCSIS</strong> de <strong>IADIS</strong> (International Association for Development of the Information Society), celebrado en Valencia, España.",
       about_related_h: "Trabajos relacionados",
-      about_related_p: "Mi acercamiento previo más directo a este tema fue mi trabajo de servicio social, donde exploré y documenté varios prototipos con IA generativa. Lo dejo aquí por si alguien quiere ver de dónde vienen muchas de las decisiones que se ven hoy en BOTAS.",
+      about_related_p: "Mi acercamiento previo más directo a este tema fue mi trabajo de servicio social, donde exploré y documenté varios prototipos con IA generativa. Lo dejo aquí por si alguien quiere ver de dónde vienen muchas de las decisiones que se ven hoy en LIMA.",
       about_related_link: "Marco Histórico y Referencial Para el Desarrollo de Aplicaciones con IA",
       about_related_note: "Servicio social · prototipos documentados en el repositorio JRATSS.",
 
@@ -79,36 +79,36 @@
       ex3: "«Busca cuáles son los archivos más pesados en la carpeta Descargas.»",
       ex4: "«Busca en el escritorio dentro de la carpeta Pruebas Usabilidad y mueve los archivos de la subcarpeta Descargas Pendientes a la subcarpeta Entregas.»",
       video_unsupported: "Tu navegador no soporta el reproductor de video.",
-      confirm_alt: "Diálogo de confirmación de BOTAS antes de ejecutar una operación.",
-      confirm_caption: "BOTAS muestra el comando y pide confirmación antes de ejecutar.",
+      confirm_alt: "Diálogo de confirmación de LIMA antes de ejecutar una operación.",
+      confirm_caption: "LIMA muestra el comando y pide confirmación antes de ejecutar.",
 
       install_h: "Instalación",
-      install_lead: "BOTAS corre en GNU/Linux. El instalador detecta tu distribución automáticamente (Debian/Ubuntu, Fedora, Arch/Manjaro, openSUSE, Alpine y Void). Despliega cada paso para ver los detalles.",
-      step1_h: "Instalar BOTAS",
+      install_lead: "LIMA corre en GNU/Linux. El instalador detecta tu distribución automáticamente (Debian/Ubuntu, Fedora, Arch/Manjaro, openSUSE, Alpine y Void). Despliega cada paso para ver los detalles.",
+      step1_h: "Instalar LIMA",
       step1_p: "Un solo comando. El instalador detecta tu distribución e instala Perl y sus módulos, SoX (audio), eSpeak (voz), el modelo de reconocimiento y demás requisitos. Requiere conexión a internet la primera vez.",
       step2_h: "Activar con tu código",
-      step2_p: "Abre <strong>BOTAS</strong> desde el menú de aplicaciones. La primera vez te pedirá tu <strong>código de acceso</strong> en una ventana: escríbelo y pulsa «Activar». Solo se hace una vez. ¿No tienes código? Pídelo en la pestaña <em>Descarga y contacto</em>.",
+      step2_p: "Abre <strong>LIMA</strong> desde el menú de aplicaciones. La primera vez te pedirá tu <strong>código de acceso</strong> en una ventana: escríbelo y pulsa «Activar». Solo se hace una vez. ¿No tienes código? Pídelo en la pestaña <em>Descarga y contacto</em>.",
       step3_h: "Usar",
-      step3_p: "Escribe tu petición o pulsa «Escuchar» y habla. También puedes activar el <strong>Modo Atención</strong> y decir la palabra «Botas» seguida de tu comando. El botón «Explicar» te muestra el comando de terminal equivalente.",
+      step3_p: "Escribe tu petición o pulsa «Escuchar» y habla. También puedes activar el <strong>Modo Atención</strong> y decir la palabra «LIMA» seguida de tu comando. El botón «Explicar» te muestra el comando de terminal equivalente.",
 
       code_h: "Tu código de acceso",
-      code_p: "La versión de demostración se conecta a la IA a través de un <strong>servidor intermedio</strong>, así que <strong>no necesitas ninguna API key</strong> ni configurar nada: solo tu código de acceso. Cada código incluye un número limitado de peticiones para que puedas probar BOTAS. Pídelo gratis en la pestaña <em>Descarga y contacto</em> y lo recibirás al instante.",
+      code_p: "La versión de demostración se conecta a la IA a través de un <strong>servidor intermedio</strong>, así que <strong>no necesitas ninguna API key</strong> ni configurar nada: solo tu código de acceso. Cada código incluye un número limitado de peticiones para que puedas probar LIMA. Pídelo gratis en la pestaña <em>Descarga y contacto</em> y lo recibirás al instante.",
 
       download_h1: "Descarga y acceso",
       dl_eyebrow: "Versión de demostración · disponible ahora",
-      dl_lead: "Instala BOTAS con un solo comando en tu terminal de GNU/Linux:",
-      dl_note: "Al abrir BOTAS por primera vez te pedirá un <strong>código de acceso</strong>. Solicítalo gratis en el formulario de abajo: lo recibes al instante.",
+      dl_lead: "Instala LIMA con un solo comando en tu terminal de GNU/Linux:",
+      dl_note: "Al abrir LIMA por primera vez te pedirá un <strong>código de acceso</strong>. Solicítalo gratis en el formulario de abajo: lo recibes al instante.",
 
       contact_h1: "Solicita tu código y contacto",
-      contact_lead: "Déjame tu correo y te asigno un <strong>código de acceso</strong> para probar BOTAS. ¿Dudas o comentarios? Escríbelos también: leo todo lo que llega por aquí.",
+      contact_lead: "Déjame tu correo y te asigno un <strong>código de acceso</strong> para probar LIMA. ¿Dudas o comentarios? Escríbelos también: leo todo lo que llega por aquí.",
       contact_name: "Nombre",
       contact_email: "Correo",
       contact_message: "Mensaje",
       contact_message_opt: "(opcional)",
-      contact_demo: "Quiero un <strong>código de acceso</strong> para probar BOTAS.",
+      contact_demo: "Quiero un <strong>código de acceso</strong> para probar LIMA.",
       contact_submit: "Solicitar acceso",
       contact_sending: "Enviando…",
-      code_intro: "Este es tu código de acceso. Cópialo y pégalo en BOTAS al abrirlo:",
+      code_intro: "Este es tu código de acceso. Cópialo y pégalo en LIMA al abrirlo:",
       code_copy: "Copiar código",
       code_copied: "¡Copiado!",
       code_hint: "Guárdalo: es personal y tiene un número limitado de usos de demostración.",
@@ -136,7 +136,7 @@
       rs_arch_p: "Ocho componentes modulares en Perl. Una petición hablada atraviesa cuatro capas: detector local, TaskLearner, parser LLM y validador de seguridad antes de ejecutarse.",
       rs_fig_arch: "Arquitectura general: el detector local intercepta ~30 % de las peticiones; el resto baja por el LLM, el validador y la ejecución.",
       rs_fig_flow: "Flujo de un comando de principio a fin: voz → Vosk/Whisper → parser → validación de seguridad → ejecución → respuesta hablada.",
-      rs_fig_attn: "Modo Atención: la palabra «botas» se detecta <strong>offline</strong>. La nube solo se contacta <em>después</em> de activar, durante una ventana de 30 s.",
+      rs_fig_attn: "Modo Atención: la palabra «lima» se detecta <strong>offline</strong>. La nube solo se contacta <em>después</em> de activar, durante una ventana de 30 s.",
 
       rs_tl_h: "TaskLearner: aprender sin dejar de ser seguro",
       rs_tl1_h: "Cómo aprende",
@@ -200,13 +200,13 @@
       rs_vid_p: "Un fragmento de una sesión del estudio, tal como ocurrió. En el registro de actividad se ve el <strong>pipeline completo en texto</strong>: grabación, transcripción, comando generado, evaluación de riesgo y ejecución.",
       rs_vid_cap: "Fragmento <strong>anonimizado</strong>: la cámara del participante está cubierta y el audio eliminado, conforme al consentimiento informado que firmaron. Las sesiones completas no se publican. <em>(La aplicación aparece con su nombre de desarrollo, LIMA.)</em>",
       rs_eff_h: "Efectividad",
-      rs_eff_p: "Con la interfaz gráfica todos completaron todo: <strong>100 %</strong> — esperable, todos saben usar una GUI. Por voz, en un <strong>primer contacto sin entrenamiento</strong>, BOTAS alcanzó un <strong>83.9 % promedio</strong> (T1 80.8 % · T2 78.6 % · T3 92.3 %), <strong>mejorando tarea tras tarea</strong>. Los fallos se concentraron donde cabía esperar: dictar seis nombres de carpeta de un tirón, o señalar un archivo concreto.",
+      rs_eff_p: "Con la interfaz gráfica todos completaron todo: <strong>100 %</strong> — esperable, todos saben usar una GUI. Por voz, en un <strong>primer contacto sin entrenamiento</strong>, LIMA alcanzó un <strong>83.9 % promedio</strong> (T1 80.8 % · T2 78.6 % · T3 92.3 %), <strong>mejorando tarea tras tarea</strong>. Los fallos se concentraron donde cabía esperar: dictar seis nombres de carpeta de un tirón, o señalar un archivo concreto.",
       rs_fig_g4: "Completitud por tarea y modalidad. La brecha es real en T1 y se cierra hacia T3: la mejora con la familiaridad es la señal alentadora bajo los números.",
       rs_effi_h: "Eficiencia",
       rs_effi_p: "Aquí está el dato incómodo: la voz fue <strong>2.1–2.5× más lenta</strong> que la GUI en el primer contacto — latencia de procesamiento más la curva de aprendizaje de cómo formular una petición. La varianza fue alta: algunos usuarios lo lograron con una instrucción limpia, otros reformularon varias veces. Aun así, la velocidad <em>percibida</em> se quedó en un moderado <strong>3.6/5</strong>: no siempre vivieron esos segundos extra como un problema.",
       rs_fig_g3: "Tiempos por tarea, modalidad y condición. Las barras de error altas son la variabilidad individual — y son un objetivo de diseño: bajar latencia y ayudar a formular mejor.",
       rs_sat_h: "Satisfacción",
-      rs_sat_p: "Y pese a ser más lento y no ser perfecto, la satisfacción fue alta: <strong>8.21/10</strong> general, con <strong>facilidad de aprendizaje 4.54/5</strong> (lo mejor valorado) y <strong>naturalidad 3.46/5</strong> (lo más débil). El <strong>85 % volvería a usar BOTAS</strong>. En la tarea repetitiva T1 la mayoría <em>prefirió la voz</em> aunque fuera más lenta: se valora la automatización desde el primer día. Ese perfil — alta capacidad de aprendizaje, naturalidad rezagada — es lo que la literatura reporta para <em>todos</em> los asistentes de voz, Alexa y Siri incluidos. Es el problema abierto del campo, no solo nuestro.",
+      rs_sat_p: "Y pese a ser más lento y no ser perfecto, la satisfacción fue alta: <strong>8.21/10</strong> general, con <strong>facilidad de aprendizaje 4.54/5</strong> (lo mejor valorado) y <strong>naturalidad 3.46/5</strong> (lo más débil). El <strong>85 % volvería a usar LIMA</strong>. En la tarea repetitiva T1 la mayoría <em>prefirió la voz</em> aunque fuera más lenta: se valora la automatización desde el primer día. Ese perfil — alta capacidad de aprendizaje, naturalidad rezagada — es lo que la literatura reporta para <em>todos</em> los asistentes de voz, Alexa y Siri incluidos. Es el problema abierto del campo, no solo nuestro.",
       rs_g1: "Calificación por participante",
       rs_g2: "Promedios por condición",
       rs_g5: "Preferencia de interfaz",
@@ -221,7 +221,7 @@
       rs_gf5: "Satisfacción final",
 
       rs_distro_h: "Validación multi-distribución",
-      rs_distro_p: "El artículo declaraba una limitación: aunque BOTAS <em>mapea</em> comandos a seis familias, las pruebas sistemáticas solo se habían hecho en Ubuntu. Corrimos el <strong>mismo instalador universal, sin modificar</strong>, en máquinas virtuales limpias de tres familias más.",
+      rs_distro_p: "El artículo declaraba una limitación: aunque LIMA <em>mapea</em> comandos a seis familias, las pruebas sistemáticas solo se habían hecho en Ubuntu. Corrimos el <strong>mismo instalador universal, sin modificar</strong>, en máquinas virtuales limpias de tres familias más.",
       rs_th_family: "Familia",
       rs_th_distro: "Distribución",
       rs_th_install: "Instalación",
@@ -239,23 +239,23 @@
 
       rs_fw_h: "Trabajo futuro",
       rs_fw1_h: "Planificador de tareas",
-      rs_fw1_p: "Nuestra propia evaluación señala el problema: pedimos al modelo que resuelva una petición de varias partes en <em>una sola</em> acción JSON. La solución es arquitectónica — <strong>planificar primero, ejecutar paso a paso</strong>. El plan se <strong>muestra antes de ejecutar nada</strong>, cada paso pasa por el <strong>mismo validador determinista</strong>, y si un paso falla BOTAS pregunta y replanifica en lugar de morir a medias dejando un desastre.",
+      rs_fw1_p: "Nuestra propia evaluación señala el problema: pedimos al modelo que resuelva una petición de varias partes en <em>una sola</em> acción JSON. La solución es arquitectónica — <strong>planificar primero, ejecutar paso a paso</strong>. El plan se <strong>muestra antes de ejecutar nada</strong>, cada paso pasa por el <strong>mismo validador determinista</strong>, y si un paso falla LIMA pregunta y replanifica en lugar de morir a medias dejando un desastre.",
       rs_fw2_h: "Conversación continua",
-      rs_fw2_p: "Hoy cada petición es <em>de un solo turno</em>: palabra clave → un comando → reposo. El estudio mostró el costo: quien necesitaba reformular tenía que decir «botas» otra vez. Lo siguiente es un diálogo que <strong>sigue abierto hasta que el usuario lo cierre</strong>. El punto de diseño clave: la <strong>salida siempre es explícita</strong> — una despedida hablada o un seguimiento rechazado. El asistente nunca decide por su cuenta seguir escuchando.",
-      rs_fig_planner: "Planificador: una petición compuesta se descompone en una cola ordenada, el <strong>plan se muestra y el usuario lo aprueba</strong>, cada paso se ejecuta por turno y, si uno falla, BOTAS pregunta y replanifica en lugar de morir a medias.",
-      rs_fig_loop: "Conversación continua: tras actuar, BOTAS pregunta «¿algo más?» y vuelve a escuchar <strong>sin necesidad de repetir la palabra clave</strong>. La salida es siempre explícita — un «botas, desestima» o un seguimiento rechazado.",
+      rs_fw2_p: "Hoy cada petición es <em>de un solo turno</em>: palabra clave → un comando → reposo. El estudio mostró el costo: quien necesitaba reformular tenía que decir «lima» otra vez. Lo siguiente es un diálogo que <strong>sigue abierto hasta que el usuario lo cierre</strong>. El punto de diseño clave: la <strong>salida siempre es explícita</strong> — una despedida hablada o un seguimiento rechazado. El asistente nunca decide por su cuenta seguir escuchando.",
+      rs_fig_planner: "Planificador: una petición compuesta se descompone en una cola ordenada, el <strong>plan se muestra y el usuario lo aprueba</strong>, cada paso se ejecuta por turno y, si uno falla, LIMA pregunta y replanifica en lugar de morir a medias.",
+      rs_fig_loop: "Conversación continua: tras actuar, LIMA pregunta «¿algo más?» y vuelve a escuchar <strong>sin necesidad de repetir la palabra clave</strong>. La salida es siempre explícita — un «lima, desestima» o un seguimiento rechazado.",
       rs_fw3: "Modelo local totalmente <strong>sin conexión</strong> (DeepSeek-R1 destilado).",
       rs_fw4: "Estudio de usabilidad <strong>contrabalanceado</strong> para eliminar el efecto de arrastre.",
       rs_fw5: "Tutorial de <strong>incorporación</strong> que enseñe a formular peticiones.",
       rs_foot: "¿Falta algo o quieres discutir la metodología? Escríbeme desde la pestaña <em>Descarga y contacto</em> — leo todo lo que llega.",
 
-      foot1: "BOTAS · Universidad Tecnológica de la Mixteca · AIS 2026 · IADIS MCCSIS · Valencia, España",
+      foot1: "LIMA · Universidad Tecnológica de la Mixteca · AIS 2026 · IADIS MCCSIS · Valencia, España",
       foot2: "Hecho con HTML, CSS y JavaScript · sin rastreadores."
     },
 
     en: {
-      page_title: "BOTAS — Voice assistant for GNU/Linux",
-      meta_desc: "BOTAS: a voice assistant acting as middleware between you and the GNU/Linux command line. Designed with Human-Centered AI (HCAI) principles.",
+      page_title: "LIMA — Voice assistant for GNU/Linux",
+      meta_desc: "LIMA: a voice assistant acting as middleware between you and the GNU/Linux command line. Designed with Human-Centered AI (HCAI) principles.",
 
       nav_what: "What is it?",
       nav_about: "About me",
@@ -264,14 +264,14 @@
 
       hero_eyebrow: "Voice assistant · GNU/Linux · HCAI approach",
       hero_h1: "Talk to your operating system.",
-      hero_lead: "<strong>BOTAS</strong> (System Operations & Tasks Automation Bot) is a voice assistant that acts as <em>middleware</em> between you and the GNU/Linux command line: you say what you want to do and BOTAS builds the command, shows it, explains it and runs it.",
+      hero_lead: "<strong>LIMA</strong> (Linux Intelligent Middleware Assistant) is a voice assistant that acts as <em>middleware</em> between you and the GNU/Linux command line: you say what you want to do and LIMA builds the command, shows it, explains it and runs it.",
       hero_cta_try: "I want to try it",
       hero_cta_how: "How it works",
-      hero_img_alt: "BOTAS graphical interface showing the greeting, status indicator and control buttons.",
-      hero_caption: "BOTAS interface (GTK).",
+      hero_img_alt: "LIMA graphical interface showing the greeting, status indicator and control buttons.",
+      hero_caption: "LIMA interface (GTK).",
 
       band1_h: "Why was it built?",
-      band1_p: "GNU/Linux powers the cloud, supercomputers and the world's phones, but its front door is still a 1970s command line. BOTAS exists to bridge that gap: make that power accessible without forcing you to memorize cryptic syntax.",
+      band1_p: "GNU/Linux powers the cloud, supercomputers and the world's phones, but its front door is still a 1970s command line. LIMA exists to bridge that gap: make that power accessible without forcing you to memorize cryptic syntax.",
       band2_h: "How is it useful?",
       band2_p: "For Linux newcomers, finding the right command stops being a roadblock. For seasoned users, it skips dozens of clicks and lets you delegate tasks by voice while doing something else. It doesn't replace the terminal: it makes it conversational.",
 
@@ -285,18 +285,18 @@
       f7_h: "Confirms risky actions", f7_p: "Shows the command before executing it and asks for confirmation on delicate operations.",
       f8_h: "Spoken reply", f8_p: "Voice feedback with OpenAI TTS or eSpeak (offline).",
 
-      callout: "BOTAS was designed under the <strong>Human-Centered AI (HCAI)</strong> paradigm: the AI <em>proposes</em>, the human <em>decides</em>. Transparency, human control, safety and empowerment guide every decision.",
+      callout: "LIMA was designed under the <strong>Human-Centered AI (HCAI)</strong> paradigm: the AI <em>proposes</em>, the human <em>decides</em>. Transparency, human control, safety and empowerment guide every decision.",
 
       about_h1: "About me",
       about_q1: "Who am I?",
       about_a1: "Hi, I'm <strong>José Ramón Aragón Toledo</strong>, a Computer Engineering student at the <strong>Universidad Tecnológica de la Mixteca</strong> (Huajuapan de León, Oaxaca, Mexico). I like tinkering with GNU/Linux, reading about human-computer interaction, and building small tools that end up being useful to someone other than me.",
       about_portfolio: "If you'd like to see other projects I've worked on, feel free to visit my <a href=\"https://hudesde.github.io/Portfolio/\" target=\"_blank\" rel=\"noopener\">portfolio</a>.",
-      about_q2: "Why did I build BOTAS?",
-      about_a2: "BOTAS was born during my <strong>social service</strong> at UTM, when I started documenting how to build apps with generative AI. I noticed something simple: the Linux terminal is hugely powerful, but also hugely intimidating for newcomers. I wanted to see whether a voice assistant, guided by <em>Human-Centered AI</em> (HCAI) principles, could make that power accessible without hiding what's happening underneath. A first Perl prototype came out of that idea and slowly grew into what BOTAS is today — and into my thesis work.",
+      about_q2: "Why did I build LIMA?",
+      about_a2: "LIMA was born during my <strong>social service</strong> at UTM, when I started documenting how to build apps with generative AI. I noticed something simple: the Linux terminal is hugely powerful, but also hugely intimidating for newcomers. I wanted to see whether a voice assistant, guided by <em>Human-Centered AI</em> (HCAI) principles, could make that power accessible without hiding what's happening underneath. A first Perl prototype came out of that idea and slowly grew into what LIMA is today — and into my thesis work.",
       about_q3: "Academic context",
-      about_a3: "BOTAS is developed at the <strong>Universidad Tecnológica de la Mixteca</strong> under the supervision of <strong>M.C. Ricardo Ruiz Rodríguez</strong>, and is presented at the <strong>AIS&nbsp;2026</strong> conference, part of the <strong>MCCSIS</strong> congress by <strong>IADIS</strong> (International Association for Development of the Information Society), held in Valencia, Spain.",
+      about_a3: "LIMA is developed at the <strong>Universidad Tecnológica de la Mixteca</strong> under the supervision of <strong>M.C. Ricardo Ruiz Rodríguez</strong>, and is presented at the <strong>AIS&nbsp;2026</strong> conference, part of the <strong>MCCSIS</strong> congress by <strong>IADIS</strong> (International Association for Development of the Information Society), held in Valencia, Spain.",
       about_related_h: "Related work",
-      about_related_p: "My closest previous approach to this topic was my social service work, where I explored and documented several generative-AI prototypes. I leave it here in case anyone wants to see where many of the decisions in BOTAS come from.",
+      about_related_p: "My closest previous approach to this topic was my social service work, where I explored and documented several generative-AI prototypes. I leave it here in case anyone wants to see where many of the decisions in LIMA come from.",
       about_related_link: "Historical and Reference Framework for the Development of AI Applications",
       about_related_note: "Social service · prototypes documented in the JRATSS repository.",
 
@@ -308,36 +308,36 @@
       ex3: "“Find the heaviest files in the Downloads folder.”",
       ex4: "“Search on the desktop inside the Usability Tests folder and move the files from the Pending Downloads subfolder to the Submissions subfolder.”",
       video_unsupported: "Your browser doesn't support the video player.",
-      confirm_alt: "BOTAS confirmation dialog before executing an operation.",
-      confirm_caption: "BOTAS shows the command and asks for confirmation before running.",
+      confirm_alt: "LIMA confirmation dialog before executing an operation.",
+      confirm_caption: "LIMA shows the command and asks for confirmation before running.",
 
       install_h: "Installation",
-      install_lead: "BOTAS runs on GNU/Linux. The installer detects your distribution automatically (Debian/Ubuntu, Fedora, Arch/Manjaro, openSUSE, Alpine and Void). Expand each step for details.",
-      step1_h: "Install BOTAS",
+      install_lead: "LIMA runs on GNU/Linux. The installer detects your distribution automatically (Debian/Ubuntu, Fedora, Arch/Manjaro, openSUSE, Alpine and Void). Expand each step for details.",
+      step1_h: "Install LIMA",
       step1_p: "A single command. The installer detects your distribution and installs Perl and its modules, SoX (audio), eSpeak (voice), the recognition model and other requirements. Needs an internet connection the first time.",
       step2_h: "Activate with your code",
-      step2_p: "Open <strong>BOTAS</strong> from your applications menu. The first time it will ask for your <strong>access code</strong> in a window: type it and click “Activate”. Only once. No code yet? Request one in the <em>Download & contact</em> tab.",
+      step2_p: "Open <strong>LIMA</strong> from your applications menu. The first time it will ask for your <strong>access code</strong> in a window: type it and click “Activate”. Only once. No code yet? Request one in the <em>Download & contact</em> tab.",
       step3_h: "Use it",
-      step3_p: "Type your request or click “Listen” and speak. You can also enable <strong>Attention Mode</strong> and say the wake word “Botas” followed by your command. The “Explain” button shows the equivalent terminal command.",
+      step3_p: "Type your request or click “Listen” and speak. You can also enable <strong>Attention Mode</strong> and say the wake word “LIMA” followed by your command. The “Explain” button shows the equivalent terminal command.",
 
       code_h: "Your access code",
-      code_p: "The demo version connects to the AI through an <strong>intermediate server</strong>, so you <strong>don't need any API key</strong> or configuration: just your access code. Each code includes a limited number of requests so you can try BOTAS. Request one for free in the <em>Download & contact</em> tab and get it instantly.",
+      code_p: "The demo version connects to the AI through an <strong>intermediate server</strong>, so you <strong>don't need any API key</strong> or configuration: just your access code. Each code includes a limited number of requests so you can try LIMA. Request one for free in the <em>Download & contact</em> tab and get it instantly.",
 
       download_h1: "Download & access",
       dl_eyebrow: "Demo version · available now",
-      dl_lead: "Install BOTAS with a single command in your GNU/Linux terminal:",
-      dl_note: "The first time you open BOTAS it will ask for an <strong>access code</strong>. Request it for free in the form below — you get it instantly.",
+      dl_lead: "Install LIMA with a single command in your GNU/Linux terminal:",
+      dl_note: "The first time you open LIMA it will ask for an <strong>access code</strong>. Request it for free in the form below — you get it instantly.",
 
       contact_h1: "Request your code & contact",
-      contact_lead: "Leave me your email and I'll assign you an <strong>access code</strong> to try BOTAS. Questions or feedback? Write them too — I read everything that comes in here.",
+      contact_lead: "Leave me your email and I'll assign you an <strong>access code</strong> to try LIMA. Questions or feedback? Write them too — I read everything that comes in here.",
       contact_name: "Name",
       contact_email: "Email",
       contact_message: "Message",
       contact_message_opt: "(optional)",
-      contact_demo: "I want an <strong>access code</strong> to try BOTAS.",
+      contact_demo: "I want an <strong>access code</strong> to try LIMA.",
       contact_submit: "Request access",
       contact_sending: "Sending…",
-      code_intro: "This is your access code. Copy it and paste it into BOTAS when you open it:",
+      code_intro: "This is your access code. Copy it and paste it into LIMA when you open it:",
       code_copy: "Copy code",
       code_copied: "Copied!",
       code_hint: "Keep it: it's personal and has a limited number of demo uses.",
@@ -365,7 +365,7 @@
       rs_arch_p: "Eight modular Perl components. A spoken request flows through four layers: local detector, TaskLearner, LLM parser and safety validator, before anything executes.",
       rs_fig_arch: "Overall architecture: the local detector intercepts ~30 % of requests; the rest flows down through the LLM, the validator and execution.",
       rs_fig_flow: "End-to-end command flow: voice → Vosk/Whisper → parser → safety validation → execution → spoken response.",
-      rs_fig_attn: "Attention Mode: the wake word «botas» is detected <strong>offline</strong>. The cloud is contacted only <em>after</em> activation, during a 30 s window.",
+      rs_fig_attn: "Attention Mode: the wake word «lima» is detected <strong>offline</strong>. The cloud is contacted only <em>after</em> activation, during a 30 s window.",
 
       rs_tl_h: "TaskLearner: learning without giving up safety",
       rs_tl1_h: "How it learns",
@@ -429,13 +429,13 @@
       rs_vid_p: "An excerpt from a study session, exactly as it happened. The activity log shows the <strong>full pipeline in text</strong>: recording, transcription, generated command, risk assessment and execution.",
       rs_vid_cap: "<strong>Anonymised</strong> excerpt: the participant's camera is covered and the audio removed, in line with the informed consent they signed. Full sessions are not published. <em>(The application appears under its development name, LIMA.)</em>",
       rs_eff_h: "Effectiveness",
-      rs_eff_p: "With the graphical interface everyone completed everything: <strong>100 %</strong> — expected, everyone knows GUIs. By voice, on a <strong>first, untrained encounter</strong>, BOTAS reached <strong>83.9 % on average</strong> (T1 80.8 % · T2 78.6 % · T3 92.3 %), <strong>improving task over task</strong>. Failures clustered exactly where you'd expect: dictating six folder names in one breath, or pinpointing one specific file.",
+      rs_eff_p: "With the graphical interface everyone completed everything: <strong>100 %</strong> — expected, everyone knows GUIs. By voice, on a <strong>first, untrained encounter</strong>, LIMA reached <strong>83.9 % on average</strong> (T1 80.8 % · T2 78.6 % · T3 92.3 %), <strong>improving task over task</strong>. Failures clustered exactly where you'd expect: dictating six folder names in one breath, or pinpointing one specific file.",
       rs_fig_g4: "Completion by task and modality. The gap is real on T1 and closes toward T3: improvement with familiarity is the encouraging signal underneath the numbers.",
       rs_effi_h: "Efficiency",
       rs_effi_p: "Here is the uncomfortable figure: voice was <strong>2.1–2.5× slower</strong> than the GUI on first contact — processing latency plus the learning curve of how to phrase a request. Variance was high: some users managed with one clean instruction, others reformulated several times. Even so, <em>perceived</em> speed stayed at a moderate <strong>3.6/5</strong>: they did not always experience those extra seconds as a problem.",
       rs_fig_g3: "Times by task, modality and condition. The tall error bars are individual variability — and they are a design target: cut latency, and help users phrase requests better.",
       rs_sat_h: "Satisfaction",
-      rs_sat_p: "And despite being slower and less than perfect, satisfaction was high: <strong>8.21/10</strong> overall, with <strong>ease of learning 4.54/5</strong> (best rated) and <strong>naturalness 3.46/5</strong> (weakest). <strong>85 % would use BOTAS again</strong>. On the repetitive task T1 most users <em>preferred voice</em> even though it was slower: automation is valued from day one. That profile — high learnability, naturalness lagging — is what the literature reports for <em>every</em> voice assistant, Alexa and Siri included. It is the field's open problem, not just ours.",
+      rs_sat_p: "And despite being slower and less than perfect, satisfaction was high: <strong>8.21/10</strong> overall, with <strong>ease of learning 4.54/5</strong> (best rated) and <strong>naturalness 3.46/5</strong> (weakest). <strong>85 % would use LIMA again</strong>. On the repetitive task T1 most users <em>preferred voice</em> even though it was slower: automation is valued from day one. That profile — high learnability, naturalness lagging — is what the literature reports for <em>every</em> voice assistant, Alexa and Siri included. It is the field's open problem, not just ours.",
       rs_g1: "Rating per participant",
       rs_g2: "Averages by condition",
       rs_g5: "Interface preference",
@@ -450,7 +450,7 @@
       rs_gf5: "Final satisfaction",
 
       rs_distro_h: "Multi-distribution validation",
-      rs_distro_p: "The paper stated a limitation: although BOTAS <em>maps</em> commands to six families, systematic tests had only been run on Ubuntu. We ran the <strong>same universal installer, unchanged</strong>, on clean virtual machines of three more families.",
+      rs_distro_p: "The paper stated a limitation: although LIMA <em>maps</em> commands to six families, systematic tests had only been run on Ubuntu. We ran the <strong>same universal installer, unchanged</strong>, on clean virtual machines of three more families.",
       rs_th_family: "Family",
       rs_th_distro: "Distribution",
       rs_th_install: "Install",
@@ -468,23 +468,23 @@
 
       rs_fw_h: "Future work",
       rs_fw1_h: "Task planner",
-      rs_fw1_p: "Our own evaluation points at the problem: we ask the model to solve a multi-part request in <em>one</em> JSON action. The fix is architectural — <strong>plan first, then execute step by step</strong>. The plan is <strong>shown before anything runs</strong>, every step passes the <strong>same deterministic validator</strong>, and if a step fails BOTAS asks and re-plans instead of dying half-way and leaving a mess.",
+      rs_fw1_p: "Our own evaluation points at the problem: we ask the model to solve a multi-part request in <em>one</em> JSON action. The fix is architectural — <strong>plan first, then execute step by step</strong>. The plan is <strong>shown before anything runs</strong>, every step passes the <strong>same deterministic validator</strong>, and if a step fails LIMA asks and re-plans instead of dying half-way and leaving a mess.",
       rs_fw2_h: "Continuous conversation",
-      rs_fw2_p: "Today every request is <em>one-shot</em>: wake word → one command → standby. The study showed the cost: anyone who needed to rephrase had to say «botas» again. Next is a dialogue that <strong>stays open until the user closes it</strong>. The key design point: the <strong>exit is always explicit</strong> — a spoken dismissal or a declined follow-up. The assistant never decides on its own to keep listening.",
-      rs_fig_planner: "Planner: a composite request is decomposed into an ordered queue, the <strong>plan is shown and the user approves it</strong>, each step runs in turn and, if one fails, BOTAS asks and re-plans instead of dying half-way.",
-      rs_fig_loop: "Continuous conversation: after acting, BOTAS asks «anything else?» and loops back to listening <strong>with no wake word needed</strong>. The exit is always explicit — a spoken «botas, desestima» or a declined follow-up.",
+      rs_fw2_p: "Today every request is <em>one-shot</em>: wake word → one command → standby. The study showed the cost: anyone who needed to rephrase had to say «lima» again. Next is a dialogue that <strong>stays open until the user closes it</strong>. The key design point: the <strong>exit is always explicit</strong> — a spoken dismissal or a declined follow-up. The assistant never decides on its own to keep listening.",
+      rs_fig_planner: "Planner: a composite request is decomposed into an ordered queue, the <strong>plan is shown and the user approves it</strong>, each step runs in turn and, if one fails, LIMA asks and re-plans instead of dying half-way.",
+      rs_fig_loop: "Continuous conversation: after acting, LIMA asks «anything else?» and loops back to listening <strong>with no wake word needed</strong>. The exit is always explicit — a spoken «lima, desestima» or a declined follow-up.",
       rs_fw3: "Fully <strong>offline</strong> local model (distilled DeepSeek-R1).",
       rs_fw4: "<strong>Counter-balanced</strong> usability study to remove the carry-over effect.",
       rs_fw5: "<strong>Onboarding</strong> tutorial that teaches how to phrase requests.",
       rs_foot: "Something missing, or want to discuss the methodology? Write to me from the <em>Download & contact</em> tab — I read everything that arrives.",
 
-      foot1: "BOTAS · Universidad Tecnológica de la Mixteca · AIS 2026 · IADIS MCCSIS · Valencia, España",
+      foot1: "LIMA · Universidad Tecnológica de la Mixteca · AIS 2026 · IADIS MCCSIS · Valencia, España",
       foot2: "Built with HTML, CSS and JavaScript · no trackers."
     },
 
     pt: {
-      page_title: "BOTAS — Assistente de voz para GNU/Linux",
-      meta_desc: "BOTAS: um assistente de voz que atua como middleware entre você e a linha de comando do GNU/Linux. Projetado com princípios de IA Centrada no Humano (HCAI).",
+      page_title: "LIMA — Assistente de voz para GNU/Linux",
+      meta_desc: "LIMA: um assistente de voz que atua como middleware entre você e a linha de comando do GNU/Linux. Projetado com princípios de IA Centrada no Humano (HCAI).",
 
       nav_what: "O que é?",
       nav_about: "Sobre mim",
@@ -493,14 +493,14 @@
 
       hero_eyebrow: "Assistente de voz · GNU/Linux · enfoque HCAI",
       hero_h1: "Fale com seu sistema operacional.",
-      hero_lead: "<strong>BOTAS</strong> (Bot de Operações e Tarefas Automatizadas do Sistema) é um assistente de voz que atua como <em>middleware</em> entre você e a linha de comando do GNU/Linux: você diz o que quer fazer e o BOTAS gera o comando, mostra, explica e executa.",
+      hero_lead: "<strong>LIMA</strong> (Linux Intelligent Middleware Assistant) é um assistente de voz que atua como <em>middleware</em> entre você e a linha de comando do GNU/Linux: você diz o que quer fazer e o LIMA gera o comando, mostra, explica e executa.",
       hero_cta_try: "Quero experimentar",
       hero_cta_how: "Como funciona",
-      hero_img_alt: "Interface gráfica do BOTAS mostrando a saudação, o indicador de estado e os botões de controle.",
-      hero_caption: "Interface do BOTAS (GTK).",
+      hero_img_alt: "Interface gráfica do LIMA mostrando a saudação, o indicador de estado e os botões de controle.",
+      hero_caption: "Interface do LIMA (GTK).",
 
       band1_h: "Para que foi feito?",
-      band1_p: "GNU/Linux move a nuvem, os supercomputadores e os celulares do mundo, mas sua porta de entrada continua sendo uma linha de comando dos anos 70. O BOTAS nasce para fechar essa lacuna: tornar esse poder acessível sem pedir ao usuário que memorize sintaxes crípticas.",
+      band1_p: "GNU/Linux move a nuvem, os supercomputadores e os celulares do mundo, mas sua porta de entrada continua sendo uma linha de comando dos anos 70. O LIMA nasce para fechar essa lacuna: tornar esse poder acessível sem pedir ao usuário que memorize sintaxes crípticas.",
       band2_h: "Como é útil?",
       band2_p: "Para quem está começando no Linux, encontrar o comando certo deixa de ser um obstáculo. Para quem já conhece, evita dezenas de cliques e permite delegar tarefas por voz enquanto faz outra coisa. Não substitui o terminal: o torna conversacional.",
 
@@ -514,18 +514,18 @@
       f7_h: "Confirma o arriscado", f7_p: "Mostra o comando antes de executá-lo e pede confirmação em operações delicadas.",
       f8_h: "Resposta falada", f8_p: "Retorno por voz com OpenAI TTS ou eSpeak (offline).",
 
-      callout: "O BOTAS foi desenhado sob o paradigma de <strong>Inteligência Artificial Centrada no Humano (HCAI)</strong>: a IA <em>propõe</em> e o humano <em>decide</em>. Transparência, controle humano, segurança e empoderamento guiam cada decisão.",
+      callout: "O LIMA foi desenhado sob o paradigma de <strong>Inteligência Artificial Centrada no Humano (HCAI)</strong>: a IA <em>propõe</em> e o humano <em>decide</em>. Transparência, controle humano, segurança e empoderamento guiam cada decisão.",
 
       about_h1: "Sobre mim",
       about_q1: "Quem sou?",
       about_a1: "Olá, sou <strong>José Ramón Aragón Toledo</strong>, estudante de Engenharia da Computação na <strong>Universidad Tecnológica de la Mixteca</strong> (Huajuapan de León, Oaxaca, México). Gosto de mexer com GNU/Linux, ler sobre interação humano-computador e construir ferramentas pequenas que acabem sendo úteis para alguém além de mim.",
       about_portfolio: "Se quiser ver outros projetos em que trabalhei, você pode visitar o meu <a href=\"https://hudesde.github.io/Portfolio/\" target=\"_blank\" rel=\"noopener\">portfólio</a>.",
-      about_q2: "Por que desenvolvi o BOTAS?",
-      about_a2: "O BOTAS nasceu durante o meu <strong>serviço social</strong> na UTM, quando comecei a documentar como se constroem aplicações com IA generativa. Percebi algo simples: o terminal do Linux é enormemente poderoso, mas também enormemente intimidante para quem está chegando. Quis testar se um assistente de voz, guiado pelos princípios de <em>IA Centrada no Humano</em> (HCAI), poderia tornar esse poder acessível sem esconder o que acontece por baixo. Daí saiu um primeiro protótipo em Perl, que foi crescendo até virar o BOTAS de hoje, e que agora faz parte do meu trabalho de tese.",
+      about_q2: "Por que desenvolvi o LIMA?",
+      about_a2: "O LIMA nasceu durante o meu <strong>serviço social</strong> na UTM, quando comecei a documentar como se constroem aplicações com IA generativa. Percebi algo simples: o terminal do Linux é enormemente poderoso, mas também enormemente intimidante para quem está chegando. Quis testar se um assistente de voz, guiado pelos princípios de <em>IA Centrada no Humano</em> (HCAI), poderia tornar esse poder acessível sem esconder o que acontece por baixo. Daí saiu um primeiro protótipo em Perl, que foi crescendo até virar o LIMA de hoje, e que agora faz parte do meu trabalho de tese.",
       about_q3: "Contexto acadêmico",
-      about_a3: "O BOTAS é desenvolvido na <strong>Universidad Tecnológica de la Mixteca</strong> sob orientação do <strong>M.C. Ricardo Ruiz Rodríguez</strong>, e é apresentado na conferência <strong>AIS&nbsp;2026</strong>, parte do congresso <strong>MCCSIS</strong> da <strong>IADIS</strong> (International Association for Development of the Information Society), realizado em Valência, Espanha.",
+      about_a3: "O LIMA é desenvolvido na <strong>Universidad Tecnológica de la Mixteca</strong> sob orientação do <strong>M.C. Ricardo Ruiz Rodríguez</strong>, e é apresentado na conferência <strong>AIS&nbsp;2026</strong>, parte do congresso <strong>MCCSIS</strong> da <strong>IADIS</strong> (International Association for Development of the Information Society), realizado em Valência, Espanha.",
       about_related_h: "Trabalhos relacionados",
-      about_related_p: "Meu trabalho anterior mais próximo deste tema foi o meu serviço social, onde explorei e documentei vários protótipos com IA generativa. Deixo aqui caso alguém queira ver de onde vêm muitas das decisões que aparecem hoje no BOTAS.",
+      about_related_p: "Meu trabalho anterior mais próximo deste tema foi o meu serviço social, onde explorei e documentei vários protótipos com IA generativa. Deixo aqui caso alguém queira ver de onde vêm muitas das decisões que aparecem hoje no LIMA.",
       about_related_link: "Marco Histórico e Referencial Para o Desenvolvimento de Aplicações com IA",
       about_related_note: "Serviço social · protótipos documentados no repositório JRATSS.",
 
@@ -537,36 +537,36 @@
       ex3: "«Encontre os arquivos mais pesados na pasta Downloads.»",
       ex4: "«Busque na área de trabalho dentro da pasta Testes de Usabilidade e mova os arquivos da subpasta Downloads Pendentes para a subpasta Entregas.»",
       video_unsupported: "Seu navegador não suporta o reprodutor de vídeo.",
-      confirm_alt: "Diálogo de confirmação do BOTAS antes de executar uma operação.",
-      confirm_caption: "O BOTAS mostra o comando e pede confirmação antes de executar.",
+      confirm_alt: "Diálogo de confirmação do LIMA antes de executar uma operação.",
+      confirm_caption: "O LIMA mostra o comando e pede confirmação antes de executar.",
 
       install_h: "Instalação",
-      install_lead: "O BOTAS roda em GNU/Linux. O instalador detecta sua distribuição automaticamente (Debian/Ubuntu, Fedora, Arch/Manjaro, openSUSE, Alpine e Void). Expanda cada passo para ver os detalhes.",
-      step1_h: "Instalar o BOTAS",
+      install_lead: "O LIMA roda em GNU/Linux. O instalador detecta sua distribuição automaticamente (Debian/Ubuntu, Fedora, Arch/Manjaro, openSUSE, Alpine e Void). Expanda cada passo para ver os detalhes.",
+      step1_h: "Instalar o LIMA",
       step1_p: "Um único comando. O instalador detecta sua distribuição e instala Perl e seus módulos, SoX (áudio), eSpeak (voz), o modelo de reconhecimento e demais requisitos. Precisa de conexão com a internet na primeira vez.",
       step2_h: "Ativar com seu código",
-      step2_p: "Abra o <strong>BOTAS</strong> no menu de aplicativos. Na primeira vez ele pedirá seu <strong>código de acesso</strong> em uma janela: digite-o e clique em «Ativar». Só uma vez. Não tem código? Peça na aba <em>Download & contato</em>.",
+      step2_p: "Abra o <strong>LIMA</strong> no menu de aplicativos. Na primeira vez ele pedirá seu <strong>código de acesso</strong> em uma janela: digite-o e clique em «Ativar». Só uma vez. Não tem código? Peça na aba <em>Download & contato</em>.",
       step3_h: "Usar",
-      step3_p: "Digite seu pedido ou clique em «Escutar» e fale. Você também pode ativar o <strong>Modo Atenção</strong> e dizer a palavra «Botas» seguida do seu comando. O botão «Explicar» mostra o comando de terminal equivalente.",
+      step3_p: "Digite seu pedido ou clique em «Escutar» e fale. Você também pode ativar o <strong>Modo Atenção</strong> e dizer a palavra «LIMA» seguida do seu comando. O botão «Explicar» mostra o comando de terminal equivalente.",
 
       code_h: "Seu código de acesso",
-      code_p: "A versão de demonstração se conecta à IA através de um <strong>servidor intermediário</strong>, então você <strong>não precisa de nenhuma API key</strong> nem de configurar nada: só do seu código de acesso. Cada código inclui um número limitado de requisições para você experimentar o BOTAS. Peça grátis na aba <em>Download & contato</em> e receba na hora.",
+      code_p: "A versão de demonstração se conecta à IA através de um <strong>servidor intermediário</strong>, então você <strong>não precisa de nenhuma API key</strong> nem de configurar nada: só do seu código de acesso. Cada código inclui um número limitado de requisições para você experimentar o LIMA. Peça grátis na aba <em>Download & contato</em> e receba na hora.",
 
       download_h1: "Download e acesso",
       dl_eyebrow: "Versão de demonstração · disponível agora",
-      dl_lead: "Instale o BOTAS com um único comando no seu terminal GNU/Linux:",
-      dl_note: "Ao abrir o BOTAS pela primeira vez ele pedirá um <strong>código de acesso</strong>. Solicite grátis no formulário abaixo — você recebe na hora.",
+      dl_lead: "Instale o LIMA com um único comando no seu terminal GNU/Linux:",
+      dl_note: "Ao abrir o LIMA pela primeira vez ele pedirá um <strong>código de acesso</strong>. Solicite grátis no formulário abaixo — você recebe na hora.",
 
       contact_h1: "Solicite seu código e contato",
-      contact_lead: "Deixe seu e-mail e eu te atribuo um <strong>código de acesso</strong> para experimentar o BOTAS. Dúvidas ou comentários? Escreva também — eu leio tudo que chega por aqui.",
+      contact_lead: "Deixe seu e-mail e eu te atribuo um <strong>código de acesso</strong> para experimentar o LIMA. Dúvidas ou comentários? Escreva também — eu leio tudo que chega por aqui.",
       contact_name: "Nome",
       contact_email: "E-mail",
       contact_message: "Mensagem",
       contact_message_opt: "(opcional)",
-      contact_demo: "Quero um <strong>código de acesso</strong> para experimentar o BOTAS.",
+      contact_demo: "Quero um <strong>código de acesso</strong> para experimentar o LIMA.",
       contact_submit: "Solicitar acesso",
       contact_sending: "Enviando…",
-      code_intro: "Este é o seu código de acesso. Copie e cole no BOTAS ao abri-lo:",
+      code_intro: "Este é o seu código de acesso. Copie e cole no LIMA ao abri-lo:",
       code_copy: "Copiar código",
       code_copied: "Copiado!",
       code_hint: "Guarde-o: é pessoal e tem um número limitado de usos de demonstração.",
@@ -594,7 +594,7 @@
       rs_arch_p: "Oito componentes modulares em Perl. Um pedido falado atravessa quatro camadas: detector local, TaskLearner, parser LLM e validador de segurança antes de executar.",
       rs_fig_arch: "Arquitetura geral: o detector local intercepta ~30 % dos pedidos; o resto desce pelo LLM, pelo validador e pela execução.",
       rs_fig_flow: "Fluxo de um comando de ponta a ponta: voz → Vosk/Whisper → parser → validação de segurança → execução → resposta falada.",
-      rs_fig_attn: "Modo Atenção: a palavra «botas» é detectada <strong>offline</strong>. A nuvem só é contactada <em>depois</em> da ativação, durante uma janela de 30 s.",
+      rs_fig_attn: "Modo Atenção: a palavra «lima» é detectada <strong>offline</strong>. A nuvem só é contactada <em>depois</em> da ativação, durante uma janela de 30 s.",
 
       rs_tl_h: "TaskLearner: aprender sem abrir mão da segurança",
       rs_tl1_h: "Como aprende",
@@ -658,13 +658,13 @@
       rs_vid_p: "Um excerto de uma sessão do estudo, tal como aconteceu. No registo de atividade vê-se o <strong>pipeline completo em texto</strong>: gravação, transcrição, comando gerado, avaliação de risco e execução.",
       rs_vid_cap: "Excerto <strong>anonimizado</strong>: a câmara do participante está tapada e o áudio removido, em conformidade com o consentimento informado que assinaram. As sessões completas não são publicadas. <em>(A aplicação aparece com o seu nome de desenvolvimento, LIMA.)</em>",
       rs_eff_h: "Eficácia",
-      rs_eff_p: "Com a interface gráfica todos completaram tudo: <strong>100 %</strong> — esperado, todos sabem usar uma GUI. Por voz, num <strong>primeiro contacto sem treino</strong>, o BOTAS alcançou <strong>83.9 % em média</strong> (T1 80.8 % · T2 78.6 % · T3 92.3 %), <strong>melhorando tarefa após tarefa</strong>. As falhas concentraram-se onde era de esperar: ditar seis nomes de pasta de uma só vez, ou apontar um ficheiro concreto.",
+      rs_eff_p: "Com a interface gráfica todos completaram tudo: <strong>100 %</strong> — esperado, todos sabem usar uma GUI. Por voz, num <strong>primeiro contacto sem treino</strong>, o LIMA alcançou <strong>83.9 % em média</strong> (T1 80.8 % · T2 78.6 % · T3 92.3 %), <strong>melhorando tarefa após tarefa</strong>. As falhas concentraram-se onde era de esperar: ditar seis nomes de pasta de uma só vez, ou apontar um ficheiro concreto.",
       rs_fig_g4: "Conclusão por tarefa e modalidade. A diferença é real na T1 e fecha-se até à T3: a melhoria com a familiaridade é o sinal encorajador por baixo dos números.",
       rs_effi_h: "Eficiência",
       rs_effi_p: "Aqui está o dado incómodo: a voz foi <strong>2.1–2.5× mais lenta</strong> que a GUI no primeiro contacto — latência de processamento mais a curva de aprendizagem de como formular um pedido. A variância foi alta: alguns conseguiram com uma instrução limpa, outros reformularam várias vezes. Ainda assim, a velocidade <em>percebida</em> ficou num moderado <strong>3.6/5</strong>: nem sempre viveram esses segundos extra como um problema.",
       rs_fig_g3: "Tempos por tarefa, modalidade e condição. As barras de erro altas são a variabilidade individual — e são um alvo de design: baixar a latência e ajudar a formular melhor.",
       rs_sat_h: "Satisfação",
-      rs_sat_p: "E apesar de mais lento e não perfeito, a satisfação foi alta: <strong>8.21/10</strong> geral, com <strong>facilidade de aprendizagem 4.54/5</strong> (o melhor avaliado) e <strong>naturalidade 3.46/5</strong> (o mais fraco). <strong>85 % voltariam a usar o BOTAS</strong>. Na tarefa repetitiva T1 a maioria <em>preferiu a voz</em> mesmo sendo mais lenta: valoriza-se a automação desde o primeiro dia. Esse perfil — alta capacidade de aprendizagem, naturalidade atrasada — é o que a literatura reporta para <em>todos</em> os assistentes de voz, Alexa e Siri incluídos. É o problema em aberto do campo, não só nosso.",
+      rs_sat_p: "E apesar de mais lento e não perfeito, a satisfação foi alta: <strong>8.21/10</strong> geral, com <strong>facilidade de aprendizagem 4.54/5</strong> (o melhor avaliado) e <strong>naturalidade 3.46/5</strong> (o mais fraco). <strong>85 % voltariam a usar o LIMA</strong>. Na tarefa repetitiva T1 a maioria <em>preferiu a voz</em> mesmo sendo mais lenta: valoriza-se a automação desde o primeiro dia. Esse perfil — alta capacidade de aprendizagem, naturalidade atrasada — é o que a literatura reporta para <em>todos</em> os assistentes de voz, Alexa e Siri incluídos. É o problema em aberto do campo, não só nosso.",
       rs_g1: "Classificação por participante",
       rs_g2: "Médias por condição",
       rs_g5: "Preferência de interface",
@@ -679,7 +679,7 @@
       rs_gf5: "Satisfação final",
 
       rs_distro_h: "Validação multi-distribuição",
-      rs_distro_p: "O artigo declarava uma limitação: embora o BOTAS <em>mapeie</em> comandos para seis famílias, os testes sistemáticos só tinham sido feitos no Ubuntu. Corremos o <strong>mesmo instalador universal, sem alterações</strong>, em máquinas virtuais limpas de mais três famílias.",
+      rs_distro_p: "O artigo declarava uma limitação: embora o LIMA <em>mapeie</em> comandos para seis famílias, os testes sistemáticos só tinham sido feitos no Ubuntu. Corremos o <strong>mesmo instalador universal, sem alterações</strong>, em máquinas virtuais limpas de mais três famílias.",
       rs_th_family: "Família",
       rs_th_distro: "Distribuição",
       rs_th_install: "Instalação",
@@ -697,17 +697,17 @@
 
       rs_fw_h: "Trabalho futuro",
       rs_fw1_h: "Planeador de tarefas",
-      rs_fw1_p: "A nossa própria avaliação aponta o problema: pedimos ao modelo que resolva um pedido de várias partes numa <em>única</em> ação JSON. A solução é arquitetural — <strong>planear primeiro, executar passo a passo</strong>. O plano é <strong>mostrado antes de executar seja o que for</strong>, cada passo passa pelo <strong>mesmo validador determinista</strong>, e se um passo falhar o BOTAS pergunta e replaneia em vez de morrer a meio deixando uma desarrumação.",
+      rs_fw1_p: "A nossa própria avaliação aponta o problema: pedimos ao modelo que resolva um pedido de várias partes numa <em>única</em> ação JSON. A solução é arquitetural — <strong>planear primeiro, executar passo a passo</strong>. O plano é <strong>mostrado antes de executar seja o que for</strong>, cada passo passa pelo <strong>mesmo validador determinista</strong>, e se um passo falhar o LIMA pergunta e replaneia em vez de morrer a meio deixando uma desarrumação.",
       rs_fw2_h: "Conversa contínua",
-      rs_fw2_p: "Hoje cada pedido é <em>de um só turno</em>: palavra-chave → um comando → repouso. O estudo mostrou o custo: quem precisava de reformular tinha de dizer «botas» outra vez. A seguir vem um diálogo que <strong>fica aberto até o utilizador o fechar</strong>. O ponto de design fundamental: a <strong>saída é sempre explícita</strong> — uma despedida falada ou um seguimento recusado. O assistente nunca decide por si continuar a ouvir.",
-      rs_fig_planner: "Planeador: um pedido composto é decomposto numa fila ordenada, o <strong>plano é mostrado e o utilizador aprova-o</strong>, cada passo executa por sua vez e, se um falhar, o BOTAS pergunta e replaneia em vez de morrer a meio.",
-      rs_fig_loop: "Conversa contínua: depois de agir, o BOTAS pergunta «mais alguma coisa?» e volta a ouvir <strong>sem precisar da palavra-chave</strong>. A saída é sempre explícita — um «botas, desestima» ou um seguimento recusado.",
+      rs_fw2_p: "Hoje cada pedido é <em>de um só turno</em>: palavra-chave → um comando → repouso. O estudo mostrou o custo: quem precisava de reformular tinha de dizer «lima» outra vez. A seguir vem um diálogo que <strong>fica aberto até o utilizador o fechar</strong>. O ponto de design fundamental: a <strong>saída é sempre explícita</strong> — uma despedida falada ou um seguimento recusado. O assistente nunca decide por si continuar a ouvir.",
+      rs_fig_planner: "Planeador: um pedido composto é decomposto numa fila ordenada, o <strong>plano é mostrado e o utilizador aprova-o</strong>, cada passo executa por sua vez e, se um falhar, o LIMA pergunta e replaneia em vez de morrer a meio.",
+      rs_fig_loop: "Conversa contínua: depois de agir, o LIMA pergunta «mais alguma coisa?» e volta a ouvir <strong>sem precisar da palavra-chave</strong>. A saída é sempre explícita — um «lima, desestima» ou um seguimento recusado.",
       rs_fw3: "Modelo local totalmente <strong>sem ligação</strong> (DeepSeek-R1 destilado).",
       rs_fw4: "Estudo de usabilidade <strong>contrabalançado</strong> para eliminar o efeito de arrastamento.",
       rs_fw5: "Tutorial de <strong>integração</strong> que ensine a formular pedidos.",
       rs_foot: "Falta alguma coisa ou quer discutir a metodologia? Escreva-me a partir da aba <em>Descarga e contacto</em> — leio tudo o que chega.",
 
-      foot1: "BOTAS · Universidad Tecnológica de la Mixteca · AIS 2026 · IADIS MCCSIS · Valencia, España",
+      foot1: "LIMA · Universidad Tecnológica de la Mixteca · AIS 2026 · IADIS MCCSIS · Valencia, España",
       foot2: "Feito com HTML, CSS e JavaScript · sem rastreadores."
     }
   };
@@ -894,8 +894,8 @@
   function sendContact() {
     var data = new FormData(form);
     data.append("access_key", WEB3FORMS_KEY);
-    data.append("subject", "Solicitud de acceso · BOTAS");
-    data.append("from_name", "Sitio BOTAS");
+    data.append("subject", "Solicitud de acceso · LIMA");
+    data.append("from_name", "Sitio LIMA");
     return fetch(WEB3FORMS_URL, { method: "POST", body: data })
       .then(function (r) { return r.json(); })
       .then(function (j) { return !!(j && j.success); })
